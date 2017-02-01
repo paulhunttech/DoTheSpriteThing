@@ -8,7 +8,7 @@
     <title>Do The Sprite Thing</title>
     <owners>woodburysoft</owners>
     <projectUrl>https://github.com/woodburysoft/DoTheSpriteThing</projectUrl>
-    <tags>sprite</tags>
+    <tags>sprite image </tags>
     <dependencies>
       <dependency id="Magick.NET.Core-Q8" version="7.0.4.400" />      
     </dependencies>
