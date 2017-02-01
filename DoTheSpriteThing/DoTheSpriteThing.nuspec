@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>clone-ranger</id>
+    <version>1.0.0</version>
+    <description>Do The Sprite Thing is a library for generating sprites for ASP.NET Core websites.</description>
+    <authors>woodburysoft</authors>
+    <title>Do The Sprite Thing</title>
+    <owners>woodburysoft</owners>
+    <projectUrl>https://github.com/woodburysoft/DoTheSpriteThing</projectUrl>
+    <tags>clone</tags>    
+  </metadata>
+  <files>
+    <file src="bin\Release\**\DoTheSpriteThing.dll" target="lib" />
+    <file src="blank.png" target="content/images" />
+  </files>
+</package>
