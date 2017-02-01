@@ -1,4 +1,4 @@
-﻿const string baseVersionNumber = "1.0.0";
+﻿const string baseVersionNumber = "1.0.1";
 const string buildConfiguration = "Release";
 
 var target = Argument("target", "Default");
