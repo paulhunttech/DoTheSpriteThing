@@ -23,7 +23,7 @@ namespace DoTheSpriteThing
                 foreach (string fileName in Directory.GetFiles(imagesFolderPath))
                 {
                     imageCollection.Add(new MagickImage(new FileInfo(fileName)));
-                    css.AppendLine(GetCss(fileName, spriteSettings.ImageHeight, spriteSettings.ImageWidth, spriteSettings.SpriteUrl, imageTop));
+                    css.AppendLine(GetCss(Path.GetFileName(fileName), spriteSettings.ImageHeight, spriteSettings.ImageWidth, spriteSettings.SpriteUrl, imageTop));
                     imageTop += spriteSettings.ImageHeight;
                 }
 
