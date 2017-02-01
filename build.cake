@@ -6,11 +6,9 @@ var target = Argument("target", "Default");
 Task("Default").IsDependentOn("Pack");
 
 Task("Pack").IsDependentOn("Build").Does(() => {
-	var revisionNumber = EnvironmentVariable("BUILD_NUMBER") ?? "0";
-
 	var nuGetPackSettings = new NuGetPackSettings
 	{
-		Version = baseVersionNumber + "." + revisionNumber,
+		Version = baseVersionNumber
 	};
 	NuGetPack("DoTheSpriteThing/DoTheSpriteThing.nuspec", nuGetPackSettings);
 });
