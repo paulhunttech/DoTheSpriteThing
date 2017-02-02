@@ -50,11 +50,13 @@ namespace DoTheSpriteThing
                 foreach (KeyValuePair<string, byte[]> image in images)
                 {
                     int useImageTop;
+                    var imageAdded = false;
 
                     if (image.Value != null)
                     {
                         imageCollection.Add(new MagickImage(image.Value));
                         useImageTop = imageTop;
+                        imageAdded = true;
                     }
                     else if (!noImageRequired)
                     {
@@ -62,6 +64,7 @@ namespace DoTheSpriteThing
                         imageCollection.Add(new MagickImage(new FileInfo(noImageFilename)));                                                
                         noImageTop = imageTop;
                         useImageTop = imageTop;
+                        imageAdded = true;
                     }
                     else
                     {
@@ -69,7 +72,11 @@ namespace DoTheSpriteThing
                     }
                     
                     css.AppendLine(GetCss(image.Key, spriteSettings.ImageHeight, spriteSettings.ImageWidth, spriteSettings.SpriteUrl, useImageTop));
-                    imageTop += spriteSettings.ImageHeight;
+
+                    if (imageAdded)
+                    {
+                        imageTop += spriteSettings.ImageHeight;
+                    }
                 }                
 
                 GenerateSpriteAndCss(imageCollection, css, spriteSettings.SpriteFilename, spriteSettings.CssFilename, spriteSettings.ImageHeight, spriteSettings.ImageWidth);
