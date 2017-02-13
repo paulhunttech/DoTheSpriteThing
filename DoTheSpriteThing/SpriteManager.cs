@@ -22,7 +22,7 @@ namespace DoTheSpriteThing
 
                 foreach (string fileName in Directory.GetFiles(imagesFolderPath))
                 {
-                    imageCollection.Add(new MagickImage(new FileInfo(fileName)));
+                    imageCollection.Add(new MagickImage(new FileInfo(fileName)) { Quality = 100 });
                     css.AppendLine(GetCss(Path.GetFileName(fileName).Replace(".", "-"), spriteSettings.ImageHeight, spriteSettings.ImageWidth, spriteSettings.SpriteUrl, imageTop));
                     imageTop += spriteSettings.ImageHeight;
                 }
@@ -54,14 +54,14 @@ namespace DoTheSpriteThing
 
                     if (image.Value != null)
                     {
-                        imageCollection.Add(new MagickImage(image.Value));
+                        imageCollection.Add(new MagickImage(image.Value) { Quality = spriteSettings.Quality });
                         useImageTop = imageTop;
                         imageAdded = true;
                     }
                     else if (!noImageRequired)
                     {
                         noImageRequired = true;
-                        imageCollection.Add(new MagickImage(new FileInfo(noImageFilename)));                                                
+                        imageCollection.Add(new MagickImage(new FileInfo(noImageFilename)) { Quality = spriteSettings.Quality });                                                
                         noImageTop = imageTop;
                         useImageTop = imageTop;
                         imageAdded = true;
@@ -90,7 +90,7 @@ namespace DoTheSpriteThing
             var montageSettings = new MontageSettings
             {
                 Geometry = new MagickGeometry(imageWidth, imageHeight),
-                TileGeometry = new MagickGeometry(1, images.Count)
+                TileGeometry = new MagickGeometry(1, images.Count)                
             };
 
             using (MagickImage result = images.Montage(montageSettings))

@@ -13,13 +13,15 @@
         /// <param name="cssFilename">The name of the CSS file that will be created or overwritten.</param>
         /// <param name="imageHeight">The height of each image in the sprite in pixels.</param>
         /// <param name="imageWidth">The width of each image in the sprite in pixels.</param>
-        public SpriteSettings(string spriteFilename, string spriteUrl, string cssFilename, int imageHeight = 64, int imageWidth = 64)
+        /// <param name="quality">The quality of the image as a percentage.</param>
+        public SpriteSettings(string spriteFilename, string spriteUrl, string cssFilename, int imageHeight = 64, int imageWidth = 64, int quality = 100)
         {
             SpriteFilename = spriteFilename;
             SpriteUrl = spriteUrl;
             CssFilename = cssFilename;
             ImageHeight = imageHeight;
             ImageWidth = imageWidth;
+            Quality = quality;
         }
 
         /// <summary>
@@ -46,5 +48,10 @@
         /// The width of each image in the sprite in pixels.
         /// </summary>
         public int ImageWidth { get; }
+
+        /// <summary>
+        /// The quality of the image as a percentage.
+        /// </summary>
+        public int Quality { get; }
     }
 }
