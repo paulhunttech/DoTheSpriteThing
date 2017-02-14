@@ -4,13 +4,12 @@
   "dependencies": {
     "Cake": "0.17.0",
     "Magick.NET.Core-Q8": "7.0.4.400",
-    "microsoft.aspnetcore.razor.runtime": "1.1.0",
-    "NETStandard.Library": "1.6.1",
-    "System.IO.FileSystem": "4.3.0"    
+    "Microsoft.AspNetCore.Razor.Runtime": "1.1.0",
+    "NETStandard.Library": "1.6.1"    
   },
 
   "frameworks": {
-    "netstandard1.5": {     
+    "netstandard1.5": {      
     }
   }
 }
