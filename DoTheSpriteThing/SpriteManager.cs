@@ -25,8 +25,8 @@ namespace DoTheSpriteThing
                     var imageForSprite = new MagickImage(new FileInfo(fileName)) { Quality = spriteSettings.Quality };                    
                     imageForSprite.Resize(new MagickGeometry($"{spriteSettings.ImageWidth}x{spriteSettings.ImageWidth}!"));
                     imageCollection.Add(imageForSprite);                    
-                    css.AppendLine(GetCss(Path.GetFileName(fileName).Replace(".", "-"), spriteSettings.ImageHeight, spriteSettings.ImageWidth, spriteSettings.SpriteUrl, imageTop));
-                    imageTop += spriteSettings.ImageHeight;
+                    css.AppendLine(GetCss(Path.GetFileName(fileName).Replace(".", "-"), imageForSprite.Height, imageForSprite.Width, spriteSettings.SpriteUrl, imageTop));
+                    imageTop += imageForSprite.Height;
                 }
 
                 GenerateSpriteAndCss(imageCollection, css, spriteSettings.SpriteFilename, spriteSettings.CssFilename);                             
@@ -43,6 +43,8 @@ namespace DoTheSpriteThing
         {
             var noImageRequired = false;
             var noImageTop = 0;
+            var noImageHeight = 0;
+            var noImageWidth = 0;
 
             using (var imageCollection = new MagickImageCollection())
             {
@@ -52,36 +54,47 @@ namespace DoTheSpriteThing
                 foreach (KeyValuePair<string, byte[]> image in images)
                 {
                     int useImageTop;
+                    int useImageHeight;
+                    int useImageWidth;
                     var imageAdded = false;
+                    MagickImage imageForSprite;
 
                     if (image.Value != null)
                     {
-                        var imageForSprite = new MagickImage(image.Value) { Quality = spriteSettings.Quality };
+                        imageForSprite = new MagickImage(image.Value) { Quality = spriteSettings.Quality };
                         imageForSprite.Resize(new MagickGeometry($"{spriteSettings.ImageWidth}x{spriteSettings.ImageWidth}!"));
                         imageCollection.Add(imageForSprite);
                         useImageTop = imageTop;
+                        useImageHeight = imageForSprite.Height;
+                        useImageWidth = imageForSprite.Width;
                         imageAdded = true;
                     }
                     else if (!noImageRequired)
                     {
-                        noImageRequired = true;
-                        var imageForSprite = new MagickImage(new FileInfo(noImageFilename)) { Quality = spriteSettings.Quality };
+                        noImageRequired = true;                        
+                        imageForSprite = new MagickImage(new FileInfo(noImageFilename)) { Quality = spriteSettings.Quality };
                         imageForSprite.Resize(new MagickGeometry($"{spriteSettings.ImageWidth}x{spriteSettings.ImageWidth}!"));
                         imageCollection.Add(imageForSprite);                                                
                         noImageTop = imageTop;
+                        noImageHeight = imageForSprite.Height;
+                        noImageWidth = imageForSprite.Width;
                         useImageTop = imageTop;
+                        useImageHeight = imageForSprite.Height;
+                        useImageWidth = imageForSprite.Width;
                         imageAdded = true;
                     }
                     else
                     {
                         useImageTop = noImageTop;
+                        useImageHeight = noImageHeight;
+                        useImageWidth = noImageWidth;
                     }
                     
-                    css.AppendLine(GetCss(image.Key, spriteSettings.ImageHeight, spriteSettings.ImageWidth, spriteSettings.SpriteUrl, useImageTop));
+                    css.AppendLine(GetCss(image.Key, useImageHeight, useImageWidth, spriteSettings.SpriteUrl, useImageTop));
 
                     if (imageAdded)
                     {
-                        imageTop += spriteSettings.ImageHeight;
+                        imageTop += useImageHeight;
                     }
                 }                
 
