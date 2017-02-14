@@ -22,12 +22,14 @@ namespace DoTheSpriteThing
 
                 foreach (string fileName in Directory.GetFiles(imagesFolderPath))
                 {
-                    imageCollection.Add(new MagickImage(new FileInfo(fileName)) { Quality = 100 });
+                    var imageForSprite = new MagickImage(new FileInfo(fileName)) { Quality = spriteSettings.Quality };                    
+                    imageForSprite.Resize(new MagickGeometry($"{spriteSettings.ImageWidth}x{spriteSettings.ImageWidth}!"));
+                    imageCollection.Add(imageForSprite);                    
                     css.AppendLine(GetCss(Path.GetFileName(fileName).Replace(".", "-"), spriteSettings.ImageHeight, spriteSettings.ImageWidth, spriteSettings.SpriteUrl, imageTop));
                     imageTop += spriteSettings.ImageHeight;
                 }
 
-                GenerateSpriteAndCss(imageCollection, css, spriteSettings.SpriteFilename, spriteSettings.CssFilename, spriteSettings.ImageHeight, spriteSettings.ImageWidth);                             
+                GenerateSpriteAndCss(imageCollection, css, spriteSettings.SpriteFilename, spriteSettings.CssFilename);                             
             }
         }
 
@@ -54,14 +56,18 @@ namespace DoTheSpriteThing
 
                     if (image.Value != null)
                     {
-                        imageCollection.Add(new MagickImage(image.Value) { Quality = spriteSettings.Quality });
+                        var imageForSprite = new MagickImage(image.Value) { Quality = spriteSettings.Quality };
+                        imageForSprite.Resize(new MagickGeometry($"{spriteSettings.ImageWidth}x{spriteSettings.ImageWidth}!"));
+                        imageCollection.Add(imageForSprite);
                         useImageTop = imageTop;
                         imageAdded = true;
                     }
                     else if (!noImageRequired)
                     {
                         noImageRequired = true;
-                        imageCollection.Add(new MagickImage(new FileInfo(noImageFilename)) { Quality = spriteSettings.Quality });                                                
+                        var imageForSprite = new MagickImage(new FileInfo(noImageFilename)) { Quality = spriteSettings.Quality };
+                        imageForSprite.Resize(new MagickGeometry($"{spriteSettings.ImageWidth}x{spriteSettings.ImageWidth}!"));
+                        imageCollection.Add(imageForSprite);                                                
                         noImageTop = imageTop;
                         useImageTop = imageTop;
                         imageAdded = true;
@@ -79,21 +85,15 @@ namespace DoTheSpriteThing
                     }
                 }                
 
-                GenerateSpriteAndCss(imageCollection, css, spriteSettings.SpriteFilename, spriteSettings.CssFilename, spriteSettings.ImageHeight, spriteSettings.ImageWidth);
+                GenerateSpriteAndCss(imageCollection, css, spriteSettings.SpriteFilename, spriteSettings.CssFilename);
             }
         }
 
         private static string GetCss(string imageKey, int imageHeight, int imageWidth, string spriteUrl, int imageTop) => $"#{imageKey} {{ height: {imageHeight}px; width: {imageWidth}px; background-image: url('{spriteUrl}'); background-position: 0px -{imageTop}px; }}";
 
-        private static void GenerateSpriteAndCss(MagickImageCollection images, StringBuilder css, string spriteFilename, string cssFilename, int imageHeight, int imageWidth)
+        private static void GenerateSpriteAndCss(MagickImageCollection images, StringBuilder css, string spriteFilename, string cssFilename)
         {            
-            var montageSettings = new MontageSettings
-            {
-                Geometry = new MagickGeometry(imageWidth, imageHeight),
-                TileGeometry = new MagickGeometry(1, images.Count)                
-            };
-
-            using (MagickImage result = images.Montage(montageSettings))
+            using (MagickImage result = images.AppendVertically())
             {
                 result.Write(spriteFilename);
             }
