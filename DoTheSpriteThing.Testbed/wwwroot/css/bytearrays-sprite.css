@@ -1,2 +1,4 @@
 #a { height: 128px; width: 128px; background-image: url('../images/sprites/bytearrays-sprite.png'); background-position: 0px -0px; }
 #b { height: 128px; width: 128px; background-image: url('../images/sprites/bytearrays-sprite.png'); background-position: 0px -128px; }
+#c { height: 128px; width: 128px; background-image: url('../images/sprites/bytearrays-sprite.png'); background-position: 0px -256px; }
+#d { height: 533px; width: 800px; background-image: url('../images/sprites/bytearrays-sprite.png'); background-position: 0px -384px; }
