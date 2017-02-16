@@ -51,7 +51,7 @@ namespace DoTheSpriteThing.Testbed.Controllers
                 new ByteArrayImage("a", System.IO.File.ReadAllBytes(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png")), "noimage1-png"),
                 new ByteArrayImage("b", null, "noimage2-png", 128, 128),
                 new ByteArrayImage("c", null, "noimage1-png", 128, 128),
-                new ByteArrayImage("d", null, "noimage2-png")
+                new ByteArrayImage("d", null, "faceboocksjdncjsdncjds")
             };
 
             IReadOnlyCollection<IImage> placeholderImages = new List<IImage>
