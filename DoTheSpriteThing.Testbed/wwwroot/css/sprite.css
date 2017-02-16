@@ -1,4 +1,4 @@
-#bbc-png { height: 64px; width: 64px; background-image: url('../images/sprites/sprite.png'); background-position: 0px -0px; }
-#blank-png { height: 64px; width: 64px; background-image: url('../images/sprites/sprite.png'); background-position: 0px -64px; }
-#facebook-png { height: 64px; width: 64px; background-image: url('../images/sprites/sprite.png'); background-position: 0px -128px; }
-#twitter-png { height: 64px; width: 64px; background-image: url('../images/sprites/sprite.png'); background-position: 0px -192px; }
+#bbc-png { height: 128px; width: 128px; background-image: url('../images/sprites/sprite.png'); background-position: 0px -0px; }
+#blank-png { height: 128px; width: 128px; background-image: url('../images/sprites/sprite.png'); background-position: 0px -128px; }
+#facebook-png { height: 128px; width: 128px; background-image: url('../images/sprites/sprite.png'); background-position: 0px -256px; }
+#twitter-png { height: 128px; width: 128px; background-image: url('../images/sprites/sprite.png'); background-position: 0px -384px; }

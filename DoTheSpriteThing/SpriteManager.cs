@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using ImageMagick;
 
@@ -14,11 +15,8 @@ namespace DoTheSpriteThing
         /// <param name="spriteSettings">The settings to use when creating the sprite.</param>
         public void CreateSprite(IReadOnlyCollection<IImage> images, SpriteSettings spriteSettings)
         {
-            var noImageRequired = false;
-            var noImageTop = 0;
-            var noImageHeight = 0;
-            var noImageWidth = 0;
-
+            var placeholderImages = new List<PlaceholdeImage>();
+            
             using (var imageCollection = new MagickImageCollection())
             {
                 var css = new StringBuilder();
@@ -50,6 +48,8 @@ namespace DoTheSpriteThing
                         var imageAdded = false;
                         MagickImage imageForSprite;
 
+                        PlaceholdeImage placeholdeImage = placeholderImages.FirstOrDefault(x => x.Key == byteArrayImage.PlaceholderImageFilename);
+
                         if (byteArrayImage.ImageData != null)
                         {
                             imageForSprite = new MagickImage(byteArrayImage.ImageData) { Quality = spriteSettings.Quality };
@@ -65,10 +65,9 @@ namespace DoTheSpriteThing
                             useImageWidth = imageForSprite.Width;
                             imageAdded = true;
                         }
-                        else if (!noImageRequired)
+                        else if (placeholdeImage == null)
                         {
-                            noImageRequired = true;
-                            imageForSprite = new MagickImage(new FileInfo(byteArrayImage.NoImageFilename)) { Quality = spriteSettings.Quality };
+                            imageForSprite = new MagickImage(new FileInfo(byteArrayImage.PlaceholderImageFilename)) { Quality = spriteSettings.Quality };
 
                             if (image.Resize)
                             {
@@ -76,19 +75,28 @@ namespace DoTheSpriteThing
                             }
 
                             imageCollection.Add(imageForSprite);
-                            noImageTop = imageTop;
-                            noImageHeight = imageForSprite.Height;
-                            noImageWidth = imageForSprite.Width;
+
+                            var placeholderImage = new PlaceholdeImage
+                            {
+                                Key = byteArrayImage.PlaceholderImageFilename,
+                                Top = imageTop,
+                                Height = imageForSprite.Height,
+                                Width = imageForSprite.Width
+                            };
+
+                            placeholderImages.Add(placeholderImage);
+                            
                             useImageTop = imageTop;
                             useImageHeight = imageForSprite.Height;
                             useImageWidth = imageForSprite.Width;
+
                             imageAdded = true;
                         }
                         else
                         {
-                            useImageTop = noImageTop;
-                            useImageHeight = noImageHeight;
-                            useImageWidth = noImageWidth;
+                            useImageTop = placeholdeImage.Top;
+                            useImageHeight = placeholdeImage.Height;
+                            useImageWidth = placeholdeImage.Width;
                         }
 
                         css.AppendLine(GetCss(byteArrayImage.Key, useImageHeight, useImageWidth, spriteSettings.SpriteUrl, useImageTop));

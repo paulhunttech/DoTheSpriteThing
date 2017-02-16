@@ -9,11 +9,13 @@
         /// Create the byte array image.
         /// </summary>
         /// <param name="key">The ID of the HTML element in which to display the image.</param>
-        /// <param name="imageData">The image data.</param>        
-        public ByteArrayImage(string key, byte[] imageData)
+        /// <param name="imageData">The image data.</param>
+        /// <param name="placeholderImageFilename">The image to use when image data is null.</param>        
+        public ByteArrayImage(string key, byte[] imageData, string placeholderImageFilename)
         {
             Key = key;
             ImageData = imageData;
+            PlaceholderImageFilename = placeholderImageFilename;
             Resize = false;
         }
 
@@ -22,12 +24,14 @@
         /// </summary>
         /// <param name="key">The ID of the HTML element in which to display the image.</param>
         /// <param name="imageData">The image data.</param>
+        /// <param name="placeholderImageFilename">The image to use when image data is null.</param>
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
-        public ByteArrayImage(string key, byte[] imageData, int resizeToHeight, int resizeToWidth)
+        public ByteArrayImage(string key, byte[] imageData, string placeholderImageFilename, int resizeToHeight, int resizeToWidth)
         {
             Key = key;
             ImageData = imageData;
+            PlaceholderImageFilename = placeholderImageFilename;
             Resize = true;
             ResizeToHeight = resizeToHeight;
             ResizeToWidth = resizeToWidth;
@@ -61,6 +65,6 @@
         /// <summary>
         /// The image to use when ImageData is null
         /// </summary>
-        public string NoImageFilename { get; set; }
+        public string PlaceholderImageFilename { get; set; }
     }
 }
