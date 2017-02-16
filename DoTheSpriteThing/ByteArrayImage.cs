@@ -23,6 +23,18 @@
         /// Create the byte array image.
         /// </summary>
         /// <param name="key">The ID of the HTML element in which to display the image.</param>
+        /// <param name="imageData">The image data.</param>        
+        public ByteArrayImage(string key, byte[] imageData)
+        {
+            Key = key;
+            ImageData = imageData;            
+            Resize = false;
+        }
+
+        /// <summary>
+        /// Create the byte array image.
+        /// </summary>
+        /// <param name="key">The ID of the HTML element in which to display the image.</param>
         /// <param name="imageData">The image data.</param>
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
@@ -32,6 +44,22 @@
             Key = key;
             ImageData = imageData;
             PlaceholderImageKey = placeholderImageKey;
+            Resize = true;
+            ResizeToHeight = resizeToHeight;
+            ResizeToWidth = resizeToWidth;
+        }
+
+        /// <summary>
+        /// Create the byte array image.
+        /// </summary>
+        /// <param name="key">The ID of the HTML element in which to display the image.</param>
+        /// <param name="imageData">The image data.</param>        
+        /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
+        /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
+        public ByteArrayImage(string key, byte[] imageData, int resizeToHeight, int resizeToWidth)
+        {
+            Key = key;
+            ImageData = imageData;            
             Resize = true;
             ResizeToHeight = resizeToHeight;
             ResizeToWidth = resizeToWidth;
