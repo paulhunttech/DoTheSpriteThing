@@ -15,8 +15,13 @@
         {
             SpriteFilename = spriteFilename;
             SpriteUrl = spriteUrl;
-            CssFilename = cssFilename;                        
+            CssFilename = cssFilename;
         }
+
+        /// <summary>
+        /// The name of the CSS file that will be created or overwritten.
+        /// </summary>
+        public string CssFilename { get; }
 
         /// <summary>
         /// The name of the sprite file that will be created or overwritten.
@@ -27,10 +32,5 @@
         /// The URL of the sprite file.
         /// </summary>
         public string SpriteUrl { get; }
-
-        /// <summary>
-        /// The name of the CSS file that will be created or overwritten.
-        /// </summary>
-        public string CssFilename { get; }        
     }
 }

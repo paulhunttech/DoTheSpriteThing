@@ -10,11 +10,11 @@ namespace DoTheSpriteThing
             Width = width;
         }
 
+        internal int Height { get; set; }
+
         internal string Key { get; set; }
 
         internal int Top { get; set; }
-
-        internal int Height { get; set; }
 
         internal int Width { get; set; }
     }

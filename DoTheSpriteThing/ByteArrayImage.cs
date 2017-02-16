@@ -1,5 +1,5 @@
 ﻿namespace DoTheSpriteThing
-{ 
+{
     /// <summary>
     /// A byte array image.
     /// </summary>
@@ -27,7 +27,7 @@
         public ByteArrayImage(string key, byte[] imageData)
         {
             Key = key;
-            ImageData = imageData;            
+            ImageData = imageData;
             Resize = false;
         }
 
@@ -59,11 +59,16 @@
         public ByteArrayImage(string key, byte[] imageData, int resizeToHeight, int resizeToWidth)
         {
             Key = key;
-            ImageData = imageData;            
+            ImageData = imageData;
             Resize = true;
             ResizeToHeight = resizeToHeight;
             ResizeToWidth = resizeToWidth;
         }
+
+        /// <summary>
+        /// The image data.
+        /// </summary>
+        public byte[] ImageData { get; }
 
         /// <summary>
         /// The ID of the HTML element in which to display the image.
@@ -71,9 +76,9 @@
         public string Key { get; }
 
         /// <summary>
-        /// The image data.
+        /// The key of the placeholder image to use when image data is null.
         /// </summary>
-        public byte[] ImageData { get; }
+        public string PlaceholderImageKey { get; }
 
         /// <summary>
         /// Should the image be resized in the sprite?
@@ -89,10 +94,5 @@
         /// The width in pixels to resize the image to.
         /// </summary>
         public int ResizeToWidth { get; }
-
-        /// <summary>
-        /// The key of the placeholder image to use when image data is null.
-        /// </summary>
-        public string PlaceholderImageKey { get; set; }
     }
 }
