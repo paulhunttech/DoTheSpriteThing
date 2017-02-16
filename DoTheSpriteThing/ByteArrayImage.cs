@@ -10,12 +10,12 @@
         /// </summary>
         /// <param name="key">The ID of the HTML element in which to display the image.</param>
         /// <param name="imageData">The image data.</param>
-        /// <param name="placeholderImageFilename">The image to use when image data is null.</param>        
-        public ByteArrayImage(string key, byte[] imageData, string placeholderImageFilename)
+        /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>        
+        public ByteArrayImage(string key, byte[] imageData, string placeholderImageKey)
         {
             Key = key;
             ImageData = imageData;
-            PlaceholderImageFilename = placeholderImageFilename;
+            PlaceholderImageKey = placeholderImageKey;
             Resize = false;
         }
 
@@ -24,14 +24,14 @@
         /// </summary>
         /// <param name="key">The ID of the HTML element in which to display the image.</param>
         /// <param name="imageData">The image data.</param>
-        /// <param name="placeholderImageFilename">The image to use when image data is null.</param>
+        /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
-        public ByteArrayImage(string key, byte[] imageData, string placeholderImageFilename, int resizeToHeight, int resizeToWidth)
+        public ByteArrayImage(string key, byte[] imageData, string placeholderImageKey, int resizeToHeight, int resizeToWidth)
         {
             Key = key;
             ImageData = imageData;
-            PlaceholderImageFilename = placeholderImageFilename;
+            PlaceholderImageKey = placeholderImageKey;
             Resize = true;
             ResizeToHeight = resizeToHeight;
             ResizeToWidth = resizeToWidth;
@@ -63,8 +63,8 @@
         public int ResizeToWidth { get; }
 
         /// <summary>
-        /// The image to use when ImageData is null
+        /// The key of the placeholder image to use when image data is null.
         /// </summary>
-        public string PlaceholderImageFilename { get; set; }
+        public string PlaceholderImageKey { get; set; }
     }
 }

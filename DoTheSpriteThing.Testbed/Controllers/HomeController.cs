@@ -46,12 +46,18 @@ namespace DoTheSpriteThing.Testbed.Controllers
         public IActionResult ByteArrays()
         {
             var spriteManager = new SpriteManager();
-            IReadOnlyCollection<IImage> imageFiles = new List<ByteArrayImage>
+            IReadOnlyCollection<IImage> images = new List<IImage>
             {
-                new ByteArrayImage("a", System.IO.File.ReadAllBytes(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png")), Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage1.png"), 128, 128),
-                new ByteArrayImage("b", null, Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage2.png"), 128, 128),
-                new ByteArrayImage("c", null, Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage1.png"), 128, 128),
-                new ByteArrayImage("d", null, Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage2.png"))
+                new ByteArrayImage("a", System.IO.File.ReadAllBytes(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png")), "noimage1-png"),
+                new ByteArrayImage("b", null, "noimage2-png", 128, 128),
+                new ByteArrayImage("c", null, "noimage1-png", 128, 128),
+                new ByteArrayImage("d", null, "noimage2-png")
+            };
+
+            IReadOnlyCollection<IImage> placeholderImages = new List<IImage>
+            {                
+                new FileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage1.png"))),
+                new FileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage2.png")))
             };
 
             string spriteFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"images\sprites");
@@ -65,7 +71,7 @@ namespace DoTheSpriteThing.Testbed.Controllers
             const string spriteUrl = "../images/sprites/bytearrays-sprite.png";
             string cssFilename = Path.Combine(_hostingEnvironment.WebRootPath, @"css\bytearrays-sprite.css");
 
-            spriteManager.CreateSprite(imageFiles, new SpriteSettings(spriteFilename, spriteUrl, cssFilename));
+            spriteManager.CreateSprite(images, placeholderImages, new SpriteSettings(spriteFilename, spriteUrl, cssFilename));
 
             return View();
         }

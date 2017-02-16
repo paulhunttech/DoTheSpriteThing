@@ -38,5 +38,7 @@ namespace DoTheSpriteThing
         public int ResizeToHeight { get; }
 
         public int ResizeToWidth { get; }
+
+        public string Key => Path.GetFileName(FilePath.FullName).Replace(".", "-");
     }
 }

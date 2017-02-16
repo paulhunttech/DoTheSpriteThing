@@ -1,8 +1,8 @@
 namespace DoTheSpriteThing
 {
-    internal class PlaceholderImage
+    internal class SpritePlaceholderImage
     {
-        internal PlaceholderImage(string key, int top, int height, int width)
+        internal SpritePlaceholderImage(string key, int top, int height, int width)
         {
             Key = key;
             Top = top;
