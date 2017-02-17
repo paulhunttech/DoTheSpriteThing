@@ -1,16 +1,8 @@
 ﻿const string baseVersionNumber = "4.1.0";
 const string buildConfiguration = "Release";
 
-var target = Argument("target", "Default");
-
-Task("Default").IsDependentOn("Pack");
-
-Task("Pack").IsDependentOn("Build").Does(() => {
-	var nuGetPackSettings = new NuGetPackSettings
-	{
-		Version = baseVersionNumber
-	};
-	NuGetPack("DoTheSpriteThing/DoTheSpriteThing.nuspec", nuGetPackSettings);
+Task("Restore").Does(() => {	
+	DotNetCoreRestore();	
 });
 
 Task("Build").IsDependentOn("Restore").Does(() => {
@@ -19,11 +11,32 @@ Task("Build").IsDependentOn("Restore").Does(() => {
 		Configuration = buildConfiguration,
 		NoIncremental = true		
 	};
-	DotNetCoreBuild("DoTheSpriteThing/project.json", buildSettings);		
+
+	DotNetCoreBuild("src/DoTheSpriteThing/project.json", buildSettings);
+	DotNetCoreBuild("test/DoTheSpriteThing.Tests/project.json", buildSettings);
+	DotNetCoreBuild("test/DoTheSpriteThing.Testbed/project.json", buildSettings);
 });
 
-Task("Restore").Does(() => {	
-	DotNetCoreRestore();	
+Task("Test").IsDependentOn("Build").Does(() => {
+	var testSettings = new DotNetCoreTestSettings
+	{
+		NoBuild = true
+	};
+
+	DotNetCoreTest("test/DoTheSpriteThing.Tests/project.json", testSettings);
 });
+
+Task("Pack").IsDependentOn("Test").Does(() => {
+	var nuGetPackSettings = new NuGetPackSettings
+	{
+		Version = baseVersionNumber
+	};
+
+	NuGetPack("src/DoTheSpriteThing/DoTheSpriteThing.nuspec", nuGetPackSettings);
+});
+
+Task("Default").IsDependentOn("Pack");
+
+var target = Argument("target", "Default");
 
 RunTarget(target);
