@@ -12,9 +12,9 @@ Task("Build").IsDependentOn("Restore").Does(() => {
 		NoIncremental = true		
 	};
 
-	DotNetCoreBuild("src/DoTheSpriteThing/project.json", buildSettings);
-	DotNetCoreBuild("test/DoTheSpriteThing.Tests/project.json", buildSettings);
-	DotNetCoreBuild("test/DoTheSpriteThing.Testbed/project.json", buildSettings);
+	DotNetCoreBuild("src/DoTheSpriteThing/DoTheSpriteThing.csproj", buildSettings);
+	DotNetCoreBuild("test/DoTheSpriteThing.Tests/DoTheSpriteThing.Tests.csproj", buildSettings);
+	DotNetCoreBuild("test/DoTheSpriteThing.Testbed/DoTheSpriteThing.Testbed.csproj", buildSettings);
 });
 
 Task("Test").IsDependentOn("Build").Does(() => {
@@ -23,7 +23,7 @@ Task("Test").IsDependentOn("Build").Does(() => {
 		NoBuild = true
 	};
 
-	DotNetCoreTest("test/DoTheSpriteThing.Tests/project.json", testSettings);
+	DotNetCoreTest("test/DoTheSpriteThing.Tests/DoTheSpriteThing.Tests.csproj", testSettings);
 });
 
 Task("Pack").IsDependentOn("Test").Does(() => {
