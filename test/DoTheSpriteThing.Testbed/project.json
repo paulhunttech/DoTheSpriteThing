@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "DoTheSpriteThing": "1.0.0-*",
-    "Microsoft.AspNetCore.Razor.Runtime": "1.1.0", 
+    "Microsoft.AspNetCore.Razor.Runtime": "1.1.0",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Mvc": "1.1.1",
     "Microsoft.AspNetCore.Routing": "1.1.0",
@@ -14,11 +14,11 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
     "Microsoft.NETCore.App": {
       "version": "1.1.0",
       "type": "platform"
-    },
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0"
+    }
   },
 
   "tools": {
