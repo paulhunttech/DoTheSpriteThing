@@ -11,6 +11,8 @@ namespace DoTheSpriteThing
     {
         private const string DefaultPlaceholderImageKey = "placeholder";
         private static readonly List<IImage> DefaultPlaceholderImages;
+        private readonly IImageProcessor _imageProcessor;
+        private readonly ICssProcessor _cssProcessor;
 
         static SpriteManager()
         {
@@ -21,6 +23,18 @@ namespace DoTheSpriteThing
             {
                 new ByteArrayImage(DefaultPlaceholderImageKey, defaultPlaceholderImageBytes)
             };
+        }
+
+        public SpriteManager()
+        {
+            _imageProcessor = new ImageProcessor(); 
+            _cssProcessor = new CssProcessor();              
+        }
+
+        internal SpriteManager(IImageProcessor imageProcessor, ICssProcessor cssProcessor)
+        {
+            _imageProcessor = imageProcessor;
+            _cssProcessor = cssProcessor;
         }
 
         /// <summary>
@@ -177,12 +191,8 @@ namespace DoTheSpriteThing
                     }
                 }
 
-                using (MagickImage result = spriteImages.AppendVertically())
-                {
-                    result.Write(spriteSettings.SpriteFilename);
-                }
-
-                File.WriteAllText(spriteSettings.CssFilename, css.ToString());
+                _imageProcessor.CreateSprite(spriteImages, spriteSettings.SpriteFilename);                                
+                _cssProcessor.CreateCss(css.ToString(), spriteSettings.CssFilename);                
             }
         }        
     }
