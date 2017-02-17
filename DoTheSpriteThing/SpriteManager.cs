@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using ImageMagick;
+using Thinktecture.IO;
+using Thinktecture.IO.Adapters;
 
 namespace DoTheSpriteThing
 {
@@ -13,6 +14,7 @@ namespace DoTheSpriteThing
         private static readonly List<IImage> DefaultPlaceholderImages;
         private readonly IImageProcessor _imageProcessor;
         private readonly ICssProcessor _cssProcessor;
+        private readonly IFile _file;
 
         static SpriteManager()
         {
@@ -28,13 +30,15 @@ namespace DoTheSpriteThing
         public SpriteManager()
         {
             _imageProcessor = new ImageProcessor(); 
-            _cssProcessor = new CssProcessor();              
+            _cssProcessor = new CssProcessor();
+            _file = new FileAdapter();
         }
 
-        internal SpriteManager(IImageProcessor imageProcessor, ICssProcessor cssProcessor)
+        internal SpriteManager(IImageProcessor imageProcessor, ICssProcessor cssProcessor, IFile file)
         {
             _imageProcessor = imageProcessor;
             _cssProcessor = cssProcessor;
+            _file = file;
         }
 
         /// <summary>
@@ -102,7 +106,7 @@ namespace DoTheSpriteThing
                     {
                         var imageFile = (FileImage)image;
 
-                        if (File.Exists(imageFile.FilePath.FullName))
+                        if (_file.Exists(imageFile.FilePath.FullName))
                         {
                             var imageForSprite = new MagickImage(imageFile.FilePath);
 
