@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using NUnit.Framework;
 using Thinktecture.IO;
+using Xunit;
 
 namespace DoTheSpriteThing.Tests
-{
-    [TestFixture]
+{    
     public class SpriteManagerTests
     {
-        private SpriteManager _spriteManager;
-        private Mock<IImageProcessor> _imageProcessorMock;
-        private Mock<ICssProcessor> _cssProcessorMock;
-        private Mock<IFile> _fileMock;
-
-        [SetUp]
-        public void TestSetup()
+        private readonly SpriteManager _spriteManager;
+        private readonly Mock<IImageProcessor> _imageProcessorMock;
+        private readonly Mock<ICssProcessor> _cssProcessorMock;
+        private readonly Mock<IFile> _fileMock;
+        
+        public SpriteManagerTests()
         {
             _imageProcessorMock = new Mock<IImageProcessor>();
             _cssProcessorMock = new Mock<ICssProcessor>();
@@ -23,15 +21,15 @@ namespace DoTheSpriteThing.Tests
             _spriteManager = new SpriteManager(_imageProcessorMock.Object, _cssProcessorMock.Object, _fileMock.Object);
         }
 
-        [Test]
+        [Fact]
         public void CreateSprite_NullImagesParam_ShouldThrow()
         {
             // Act + Assert
             var exception = Assert.Throws<ArgumentNullException>(() => _spriteManager.CreateSprite(null, null, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
-            Assert.That(exception.ParamName, Is.EqualTo("images"));
+            Assert.Equal(exception.ParamName, "images");
         }
 
-        [Test]
+        [Fact]
         public void CreateSprite_DuplicateKeysInImagesParam_ShouldThrow()
         {
             // Arrange
@@ -43,11 +41,11 @@ namespace DoTheSpriteThing.Tests
 
             // Act + Assert
             var exception = Assert.Throws<ArgumentException>(() => _spriteManager.CreateSprite(images, null, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
-            Assert.That(exception.Message, Is.EqualTo("The list of keys must be unique.\r\nParameter name: images"));
-            Assert.That(exception.ParamName, Is.EqualTo("images"));
+            Assert.Equal(exception.Message, "The list of keys must be unique.\r\nParameter name: images");
+            Assert.Equal(exception.ParamName, "images");
         }
 
-        [Test]
+        [Fact]
         public void CreateSprite_DuplicateKeysInPlaceholderImagesParam_ShouldThrow()
         {
             // Arrange
@@ -59,16 +57,16 @@ namespace DoTheSpriteThing.Tests
 
             // Act + Assert
             var exception = Assert.Throws<ArgumentException>(() => _spriteManager.CreateSprite(new List<IImage>(), placeholderImages, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
-            Assert.That(exception.Message, Is.EqualTo("The list of keys must be unique.\r\nParameter name: placeholderImages"));
-            Assert.That(exception.ParamName, Is.EqualTo("placeholderImages"));
+            Assert.Equal(exception.Message, "The list of keys must be unique.\r\nParameter name: placeholderImages");
+            Assert.Equal(exception.ParamName, "placeholderImages");
         }
 
-        [Test]
+        [Fact]
         public void CreateSprite_NullSpriteSettingsParam_ShouldThrow()
         {
             // Act + Assert
             var exception = Assert.Throws<ArgumentNullException>(() => _spriteManager.CreateSprite(new List<IImage>(), null, null));
-            Assert.That(exception.ParamName, Is.EqualTo("spriteSettings"));
+            Assert.Equal(exception.ParamName, "spriteSettings");
         }
     }
 }
