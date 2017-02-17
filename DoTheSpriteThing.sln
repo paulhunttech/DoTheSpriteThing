@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DoTheSpriteThing", "DoTheSpriteThing\DoTheSpriteThing.xproj", "{3CE0D664-9542-4015-9C37-D200B95D2EE4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{538BE65E-4A78-4CE6-9BCA-69DA702ACA5B}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -13,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DoTheSpriteThing.Testbed", "DoTheSpriteThing.Testbed\DoTheSpriteThing.Testbed.xproj", "{98009248-5D78-48EA-9E31-D0EB7E1539C3}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DoTheSpriteThing", "src\DoTheSpriteThing\DoTheSpriteThing.xproj", "{3CE0D664-9542-4015-9C37-D200B95D2EE4}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DoTheSpriteThing.Testbed", "test\DoTheSpriteThing.Testbed\DoTheSpriteThing.Testbed.xproj", "{98009248-5D78-48EA-9E31-D0EB7E1539C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
