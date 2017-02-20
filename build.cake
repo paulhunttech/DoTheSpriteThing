@@ -20,6 +20,7 @@ Task("Build").IsDependentOn("Restore").Does(() => {
 Task("Test").IsDependentOn("Build").Does(() => {
 	var testSettings = new DotNetCoreTestSettings
 	{
+		Configuration = buildConfiguration,
 		NoBuild = true
 	};
 
