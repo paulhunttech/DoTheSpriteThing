@@ -15,6 +15,7 @@ namespace DoTheSpriteThing
         private readonly IImageProcessor _imageProcessor;
         private readonly ICssProcessor _cssProcessor;
         private readonly IFile _file;
+        private readonly IMagickImageHelper _magickImageHelper;
 
         static SpriteManager()
         {
@@ -32,13 +33,15 @@ namespace DoTheSpriteThing
             _imageProcessor = new ImageProcessor(); 
             _cssProcessor = new CssProcessor();
             _file = new FileAdapter();
+            _magickImageHelper = new MagickImageHelper();
         }
 
-        internal SpriteManager(IImageProcessor imageProcessor, ICssProcessor cssProcessor, IFile file)
+        internal SpriteManager(IImageProcessor imageProcessor, ICssProcessor cssProcessor, IFile file, IMagickImageHelper magickImageHelper)
         {
             _imageProcessor = imageProcessor;
             _cssProcessor = cssProcessor;
             _file = file;
+            _magickImageHelper = magickImageHelper;
         }
 
         /// <summary>
@@ -107,8 +110,8 @@ namespace DoTheSpriteThing
                         var imageFile = (FileImage)image;
 
                         if (_file.Exists(imageFile.FilePath.FullName))
-                        {
-                            var imageForSprite = new MagickImage(imageFile.FilePath);
+                        {                            
+                            MagickImage imageForSprite = _magickImageHelper.Create(imageFile.FilePath);
 
                             if (imageFile.Resize)
                             {
@@ -133,7 +136,7 @@ namespace DoTheSpriteThing
 
                         if (byteArrayImage.ImageData != null)
                         {
-                            var imageForSprite = new MagickImage(byteArrayImage.ImageData);
+                            var imageForSprite = _magickImageHelper.Create(byteArrayImage.ImageData);
 
                             if (image.Resize)
                             {
@@ -159,11 +162,11 @@ namespace DoTheSpriteThing
 
                         if (selectedPlaceholderImage is FileImage)
                         {
-                            imageForSprite = new MagickImage(((FileImage)selectedPlaceholderImage).FilePath);
+                            imageForSprite = _magickImageHelper.Create(((FileImage)selectedPlaceholderImage).FilePath);
                         }
                         else
                         {
-                            imageForSprite = new MagickImage(((ByteArrayImage)selectedPlaceholderImage).ImageData);
+                            imageForSprite = _magickImageHelper.Create(((ByteArrayImage)selectedPlaceholderImage).ImageData);
                         }
 
                         if (image.Resize)
