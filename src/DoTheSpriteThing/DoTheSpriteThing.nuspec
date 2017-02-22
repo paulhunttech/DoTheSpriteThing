@@ -6,6 +6,7 @@
     <description>Do The Sprite Thing is a library for generating sprites for ASP.NET Core websites.</description>
     <authors>woodburysoft</authors>
     <title>Do The Sprite Thing</title>
+    <licenseUrl>https://opensource.org/licenses/LGPL-3.0</licenseUrl>
     <owners>woodburysoft</owners>
     <projectUrl>https://github.com/woodburysoft/DoTheSpriteThing</projectUrl>
     <tags>sprite image</tags>
