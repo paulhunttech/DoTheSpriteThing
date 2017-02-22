@@ -6,9 +6,9 @@
 
 ## Purpose ##
 
-Do The Sprite Thing is a library for generating sprites for ASP.NET Core websites.
+Do The Sprite Thing is a library for generating image sprites for ASP.NET Core websites. When a web page is displaying a number of separate images, each one will be downloaded using a separate HTTP request and so combining these images into a single image sprite will improve the performance of the page. You can find more information on how image sprites work at [w3Schools](https://www.w3schools.com/css/css_image_sprites.asp).
 
-## Install instructions ##
+## Installation instructions ##
 
 ```shell
 nuget install do-the-sprite-thing
