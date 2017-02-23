@@ -97,6 +97,30 @@ namespace DoTheSpriteThing.Testbed.Controllers
             return View();
         }
 
+        public IActionResult Hover()
+        {
+            var spriteManager = new SpriteManager();
+            IReadOnlyCollection<IImage> images = new List<IImage>
+            {
+                new FileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\bbc.png")), new HoverFileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png"))))
+            };            
+
+            string spriteFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"images\sprites");
+
+            if (!Directory.Exists(spriteFolder))
+            {
+                Directory.CreateDirectory(spriteFolder);
+            }
+
+            string spriteFilename = Path.Combine(spriteFolder, "hover-sprite.png");
+            const string spriteUrl = "../images/sprites/hover-sprite.png";
+            string cssFilename = Path.Combine(_hostingEnvironment.WebRootPath, @"css\hover-sprite.css");
+
+            spriteManager.CreateSprite(images, null, new SpriteSettings(spriteFilename, spriteUrl, cssFilename));
+
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();

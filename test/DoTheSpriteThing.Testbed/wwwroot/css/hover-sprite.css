@@ -1,0 +1,2 @@
+#bbc-png { height: 1125px; width: 1125px; background-image: url('../images/sprites/hover-sprite.png'); background-position: 0px -0px; }
+#bbc-png:hover { height: 1125px; width: 1125px; background-image: url('../images/sprites/hover-sprite.png'); background-position: 0px -1125px; }

@@ -11,5 +11,7 @@ namespace DoTheSpriteThing
         int ResizeToHeight { get; }
 
         int ResizeToWidth { get; }
+
+        IHoverImage HoverImage { get; }
     }
 }
