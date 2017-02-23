@@ -1,4 +1,4 @@
-﻿const string baseVersionNumber = "4.1.1";
+﻿const string baseVersionNumber = "4.2.0";
 const string buildConfiguration = "Release";
 
 Task("Restore").Does(() => {	
