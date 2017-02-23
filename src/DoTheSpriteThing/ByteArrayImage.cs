@@ -71,10 +71,7 @@
         public string Key { get; }
 
         public byte[] ImageData { get; }
-
-        /// <summary>
-        /// Should the image be resized in the sprite?
-        /// </summary>
+        
         public bool Resize { get; }
 
         /// <summary>
