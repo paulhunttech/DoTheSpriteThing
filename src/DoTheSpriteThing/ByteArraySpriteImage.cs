@@ -134,12 +134,19 @@
         }
 
         /// <summary>
+        /// The image to display when hovering over the image.
+        /// </summary>
+        public IHoverImage HoverImage { get; }
+
+        public byte[] ImageData { get; }
+
+        /// <summary>
         /// The ID of the HTML element in which to display the image.
         /// </summary>
         public string Key { get; }
 
-        public byte[] ImageData { get; }
-        
+        public string PlaceholderImageKey { get; }
+
         public bool Resize { get; }
 
         /// <summary>
@@ -151,12 +158,5 @@
         /// The width in pixels to resize the image to.
         /// </summary>
         public int ResizeToWidth { get; }
-
-        /// <summary>
-        /// The image to display when hovering over the image.
-        /// </summary>
-        public IHoverImage HoverImage { get; }
-
-        public string PlaceholderImageKey { get; }
     }
 }

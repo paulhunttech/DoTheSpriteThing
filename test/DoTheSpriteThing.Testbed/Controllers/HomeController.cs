@@ -53,7 +53,7 @@ namespace DoTheSpriteThing.Testbed.Controllers
         {
             var spriteManager = new SpriteManager();
             string imagesFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-            List<FileSpriteImage> imageFiles = Directory.GetFiles(imagesFolder).Select(x => new FileSpriteImage(new FileInfo(x), 128, 128)).ToList();            
+            List<FileSpriteImage> imageFiles = Directory.GetFiles(imagesFolder).Select(x => new FileSpriteImage(new FileInfo(x), 128, 128)).ToList();
             imageFiles.Add(new FileSpriteImage(new FileInfo("aaaaaaaaaaa"), 128, 128));
 
             string spriteFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"images\sprites");
@@ -103,7 +103,7 @@ namespace DoTheSpriteThing.Testbed.Controllers
             IReadOnlyCollection<ISpriteImage> images = new List<ISpriteImage>
             {
                 new FileSpriteImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\bbc.png")), new HoverFileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png"))))
-            };            
+            };
 
             string spriteFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"images\sprites");
 

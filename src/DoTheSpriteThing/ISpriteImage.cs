@@ -2,6 +2,8 @@ namespace DoTheSpriteThing
 {
     public interface ISpriteImage : IImage
     {
+        IHoverImage HoverImage { get; }
+
         string Key { get; }
 
         string PlaceholderImageKey { get; }
@@ -11,7 +13,5 @@ namespace DoTheSpriteThing
         int ResizeToHeight { get; }
 
         int ResizeToWidth { get; }
-
-        IHoverImage HoverImage { get; }
     }
 }

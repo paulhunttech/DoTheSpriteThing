@@ -12,9 +12,9 @@ namespace DoTheSpriteThing
     {
         private const string DefaultPlaceholderImageKey = "placeholder";
         private static readonly List<ISpriteImage> DefaultPlaceholderImages;
-        private readonly IImageProcessor _imageProcessor;
         private readonly ICssProcessor _cssProcessor;
         private readonly IFile _file;
+        private readonly IImageProcessor _imageProcessor;
         private readonly IMagickImageHelper _magickImageHelper;
 
         static SpriteManager()
@@ -30,7 +30,7 @@ namespace DoTheSpriteThing
 
         public SpriteManager()
         {
-            _imageProcessor = new ImageProcessor(); 
+            _imageProcessor = new ImageProcessor();
             _cssProcessor = new CssProcessor();
             _file = new FileAdapter();
             _magickImageHelper = new MagickImageHelper();
@@ -53,57 +53,6 @@ namespace DoTheSpriteThing
         {
             CreateSprite(images, DefaultPlaceholderImages, spriteSettings);
         }
-
-        private MagickImage ImageToMagickImage(ISpriteImage image)
-        {
-            return ImageToMagickImage(image, null);
-        }
-
-        private MagickImage ImageToMagickImage(IImage image, MagickImage parentImage)
-        {
-            MagickImage imageForSprite = null;
-
-            if (image is IFileImage)
-            {
-                var fileImage = (IFileImage)image;
-
-                if (_file.Exists(fileImage.FilePath.FullName))
-                {
-                    imageForSprite = _magickImageHelper.Create(fileImage.FilePath);                                        
-                }
-            }
-            else if (image is IByteArrayImage)
-            {
-                var byteArrayImage = (IByteArrayImage)image;
-
-                if (byteArrayImage.ImageData != null)
-                {
-                    imageForSprite = _magickImageHelper.Create(byteArrayImage.ImageData);                    
-                }
-            }
-
-            if (imageForSprite != null)
-            {
-                if (image is ISpriteImage)
-                {
-                    var spriteImage = (ISpriteImage)image;
-
-                    if (spriteImage.Resize)
-                    {
-                        imageForSprite.Resize(new MagickGeometry($"{spriteImage.ResizeToHeight}x{spriteImage.ResizeToWidth}!"));
-                    }
-                }
-                else if (image is IHoverImage)
-                {
-                    if (imageForSprite.Height != parentImage.Height || imageForSprite.Width != parentImage.Width)
-                    {
-                        imageForSprite.Resize(new MagickGeometry($"{parentImage.Height}x{parentImage.Width}!"));
-                    }
-                }
-            }
-
-            return imageForSprite;
-        }        
 
         /// <summary>
         /// Create a sprite image from a list of images and the CSS to render each image.
@@ -168,8 +117,8 @@ namespace DoTheSpriteThing
                     else
                     {
                         string selectedPlaceholderImageKey = placeholderImages.Any(x => x.Key == image.PlaceholderImageKey) ? image.PlaceholderImageKey : placeholderImages.First().Key;
-                        ISpriteImage selectedPlaceholderImage = placeholderImages.FirstOrDefault(x => x.Key == selectedPlaceholderImageKey);                                                
-                        imageForSprite = ImageToMagickImage(selectedPlaceholderImage);                        
+                        ISpriteImage selectedPlaceholderImage = placeholderImages.FirstOrDefault(x => x.Key == selectedPlaceholderImageKey);
+                        imageForSprite = ImageToMagickImage(selectedPlaceholderImage);
 
                         SpritePlaceholderImage spritePlaceholderImage = spritePlaceholderImages.FirstOrDefault(x => x.Key == selectedPlaceholderImageKey && x.Width == imageForSprite.Width && x.Height == imageForSprite.Height);
 
@@ -184,10 +133,10 @@ namespace DoTheSpriteThing
 
                         selectedImageTop = spritePlaceholderImage.Top;
                         selectedImageHeight = spritePlaceholderImage.Height;
-                        selectedImageWidth = spritePlaceholderImage.Width;                        
+                        selectedImageWidth = spritePlaceholderImage.Width;
                     }
 
-                    css.AppendLine($"#{image.Key} {{ height: {selectedImageHeight}px; width: {selectedImageWidth}px; background-image: url('{spriteSettings.SpriteUrl}'); background-position: 0px -{selectedImageTop}px; }}");                    
+                    css.AppendLine($"#{image.Key} {{ height: {selectedImageHeight}px; width: {selectedImageWidth}px; background-image: url('{spriteSettings.SpriteUrl}'); background-position: 0px -{selectedImageTop}px; }}");
 
                     if (hasImageBeenAddedToSprite)
                     {
@@ -196,7 +145,7 @@ namespace DoTheSpriteThing
 
                     if (image.HoverImage != null)
                     {
-                        var hoverImageForSprite = ImageToMagickImage(image.HoverImage, imageForSprite);
+                        MagickImage hoverImageForSprite = ImageToMagickImage(image.HoverImage, imageForSprite);
 
                         if (hoverImageForSprite != null)
                         {
@@ -205,20 +154,71 @@ namespace DoTheSpriteThing
                             selectedHoverImageTop = nextSpriteImageTop;
                             selectedHoverImageHeight = hoverImageForSprite.Height;
                             selectedHoverImageWidth = hoverImageForSprite.Width;
-                        }                        
-                        
+                        }
+
                         css.AppendLine($"#{image.Key}:hover {{ height: {selectedHoverImageHeight}px; width: {selectedHoverImageWidth}px; background-image: url('{spriteSettings.SpriteUrl}'); background-position: 0px -{selectedHoverImageTop}px; }}");
 
                         if (hasImageBeenAddedToSprite)
                         {
                             nextSpriteImageTop += selectedHoverImageHeight;
                         }
-                    }                    
+                    }
                 }
 
-                _imageProcessor.CreateSprite(spriteImages, spriteSettings.SpriteFilename);                                
-                _cssProcessor.CreateCss(css.ToString(), spriteSettings.CssFilename);                
+                _imageProcessor.CreateSprite(spriteImages, spriteSettings.SpriteFilename);
+                _cssProcessor.CreateCss(css.ToString(), spriteSettings.CssFilename);
             }
-        }        
+        }
+
+        private MagickImage ImageToMagickImage(ISpriteImage image)
+        {
+            return ImageToMagickImage(image, null);
+        }
+
+        private MagickImage ImageToMagickImage(IImage image, MagickImage parentImage)
+        {
+            MagickImage imageForSprite = null;
+
+            if (image is IFileImage)
+            {
+                var fileImage = (IFileImage)image;
+
+                if (_file.Exists(fileImage.FilePath.FullName))
+                {
+                    imageForSprite = _magickImageHelper.Create(fileImage.FilePath);
+                }
+            }
+            else if (image is IByteArrayImage)
+            {
+                var byteArrayImage = (IByteArrayImage)image;
+
+                if (byteArrayImage.ImageData != null)
+                {
+                    imageForSprite = _magickImageHelper.Create(byteArrayImage.ImageData);
+                }
+            }
+
+            if (imageForSprite != null)
+            {
+                if (image is ISpriteImage)
+                {
+                    var spriteImage = (ISpriteImage)image;
+
+                    if (spriteImage.Resize)
+                    {
+                        imageForSprite.Resize(new MagickGeometry($"{spriteImage.ResizeToHeight}x{spriteImage.ResizeToWidth}!"));
+                    }
+                }
+                else if (image is IHoverImage)
+                {
+                    if (imageForSprite.Height != parentImage.Height || imageForSprite.Width != parentImage.Width)
+                    {
+                        imageForSprite.Resize(new MagickGeometry($"{parentImage.Height}x{parentImage.Width}!"));
+                    }
+                }
+            }
+
+            return imageForSprite;
+        }
     }
 }

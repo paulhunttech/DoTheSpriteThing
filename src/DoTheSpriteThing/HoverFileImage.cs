@@ -15,7 +15,7 @@ namespace DoTheSpriteThing
         public HoverFileImage(FileInfo filePath, string placeholderImageKey)
         {
             FilePath = filePath;
-            PlaceholderImageKey = placeholderImageKey;            
+            PlaceholderImageKey = placeholderImageKey;
         }
 
         /// <summary>
@@ -24,11 +24,11 @@ namespace DoTheSpriteThing
         /// <param name="filePath">The path of the image file.</param>        
         public HoverFileImage(FileInfo filePath)
         {
-            FilePath = filePath;            
-        }        
+            FilePath = filePath;
+        }
 
-        public FileInfo FilePath { get; }        
+        public FileInfo FilePath { get; }
 
-        public string PlaceholderImageKey { get; }        
+        public string PlaceholderImageKey { get; }
     }
 }

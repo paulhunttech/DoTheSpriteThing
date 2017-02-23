@@ -4,6 +4,6 @@ namespace DoTheSpriteThing
 {
     public interface IFileImage
     {
-        FileInfo FilePath { get; }        
+        FileInfo FilePath { get; }
     }
 }
