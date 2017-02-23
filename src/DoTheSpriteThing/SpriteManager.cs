@@ -11,7 +11,7 @@ namespace DoTheSpriteThing
     public class SpriteManager
     {
         private const string DefaultPlaceholderImageKey = "placeholder";
-        private static readonly List<IImage> DefaultPlaceholderImages;
+        private static readonly List<ISpriteImage> DefaultPlaceholderImages;
         private readonly IImageProcessor _imageProcessor;
         private readonly ICssProcessor _cssProcessor;
         private readonly IFile _file;
@@ -22,9 +22,9 @@ namespace DoTheSpriteThing
             const string defaultPlaceholderImageBase64 = "iVBORw0KGgoAAAANSUhEUgAAAPwAAACvCAMAAADub0MMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAAKGhoaKioqOjo6SkpKWlpaampqenp6ioqKmpqaqqqqurqwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMqx+eoAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjEzNANbegAABghJREFUeF7t3Ol62jgYQOHOtJ1u93+9DIG3CYt2ybGFfX6Fb5PO4yZBjumX05l/9se3N++zvJe7403elzvk9MUXe+SQ3yu/Dvmdcshfefutvwv+I7xL+fd3Nof8FZkdQPiQh8wOIHzIQ2YHED7kIbMDCB/ykNkBhA95yOwAwoc8ZHYA4UMeMkG+XSr+9Wp2LjJnSuTlr/wSnBkqBfKyH/yRmBciWfnvknfITQuNnLzUI7KzwiIjL/OM/KSQSMtLhFAxJxyS8v9KBFEzJRSS8uIRFM0Ig5S8cAxVM8IgIf9bOIq6CSGQkBeNo25CCPTIf1U4HwTi8tejTBKV82H/cXnBFCrnw/4PechAMIXK+bD/LvnfSqfD/rvkp72vYf/HP3vIQDCFyvmw/0MeMvgqmkDlfNh/XL7g0iucD/vvkVc3IQQS8sH7treomxACCfncpVc1IwxS8j/FI6hahOvTsV6M5zL9TEI+fenVLMHHPSSB0ZielE/Zq1iC2zsJy/xpzPC0fNz+h4IFuH+D8V10KGZn5GP2Cx5pHn/SLHF0NDonH7aXWwRLfCA+EpOz8qc/sh8seuPSGrfIDMTgvPzp9EP+yrJPZ1jkHrlxmFsif+bvu72ln0v5ZZ17hv+EMbdQ/rOwk0dkh2HstuRt5Bn5UZi6Kfn4n8QHf7uZuiX58Df8lbHf9oZuSd42wqgZg5kbkreLGKqGYOR25HP3DEe+tTJyO/I2EUfdCEzcjLw9pFA5AAO3Im8LadT2Y95G5AuehDhz+a9tRmDeRuTtIIfqbozbhrwN5FHfi2mbkLd+CTo6MWwL8vf3C9KMuXdo2BbkLV+Gnj7M2oC81UvR1YVR68tbvBx9PZi0unzqHBtmwOnWpNXlrV2Dzg4MWlve0nXobcecleWTn+WI0n1Ty5x15Z//IFKG9maMWVfewvXob8WUVeWt24IJjRiypnzZOTZM3+nWkDXlLduGGW2YsaK8VVsxpQkj1pO3aDvmtGDCavLZp/yydDywYsJq8tbswaQGDBgjXz9ARx9m1aN/hPzNryyRLMo7aX6bq3+A/N37c7EM9efYMK2nW+398g9nE9E0avsxrxbd3fJPF1E8hcoRmFiJ5m55vTdIxGk7x4Zp+7bX3Cuv9ZbcfkZ9w19pejhXb6d88CLKxVA1ClOr0NonH7mIsmHUjMPcGnT2yWt8QjpEwYe2Kmk43ersktf3TGI/KkZicgUae+QTP7VVPCM/FrPL0dcjry2IkkdkR2N6Mdo65HVFUHRPz42rFLWnW23t8ppiBPcjNx7zS9HVLJ+9iOpukVkCKxSiqVleTwKFH4gvgzXK0NMqryWJ0r/UPIBRT9UjG3oa5XWkeThtiy6FVYrQ0iZfeBFVXxFbDuuUoKNNXkMW5W+ILEjF6VZHk7z6PB/7GXuODVN+U0tDi7zyEt5P214vi7XyqG+Qr7qIerxaGqtlUd4gr7qQS8vIG1cpSj+QoLxeXnEpl9Otr5fnssM8qqvlqy/iucdXn8F1kzkUV8urreAz3SslKuWVbpeim1pqK+VVbhk7TaK0Tn6pmxFDsdcUKuvkFW4cm02gsEpe3dbJn24V1sgr2z72G0ddhXz/UzSfhh1HUVYhr2oKbDmGqnJ5RXOQOd2qKpZXMwt2HUFRqXzmf0jbHvYdRk2pvJJ5SN7UUlMor2Im7DyIkjL5z7oZMRR7D6GiSL710yArY/cBFBTJy89G/HSroEReej7s/xn5AvkpzrFhGDwhXSAvOyUUHpHNy0vOSeSRDdmsvNyssHhAMic/0Tk2DI975HLyUhND5A6pjLzMzPykcotUWl5ibrjcIpOUX/Ypmk+DzQ0SSXnx2Xk+3Uqk5IXn5+kDCeIJ+SnPsWEYvSMcl/+Mp2g+DU5/EY3LC74GD6db0ai82KvACoIx+fGfBlkZXlfEYvJCLwSxC0IReZFX4vZ0KxSWF3gtuL0hEpSf/hwbht0ZgaC81y8Hvcw/+1eH8CEPmR1A+JCHzA4gfMhDZgcQvpXfH4f8Xjnk98rvPcufvrzoAbaE05f333q743SWf727lWWcTqf/AWh9bguWJclIAAAAAElFTkSuQmCC";
             byte[] defaultPlaceholderImageBytes = Convert.FromBase64String(defaultPlaceholderImageBase64);
 
-            DefaultPlaceholderImages = new List<IImage>
+            DefaultPlaceholderImages = new List<ISpriteImage>
             {
-                new ByteArrayImage(DefaultPlaceholderImageKey, defaultPlaceholderImageBytes)
+                new ByteArraySpriteImage(DefaultPlaceholderImageKey, defaultPlaceholderImageBytes)
             };
         }
 
@@ -49,37 +49,52 @@ namespace DoTheSpriteThing
         /// </summary>
         /// <param name="images">The list of images to include in the sprite.</param>        
         /// <param name="spriteSettings">The settings to use when creating the sprite.</param>
-        public void CreateSprite(IReadOnlyCollection<IImage> images, SpriteSettings spriteSettings)
+        public void CreateSprite(IReadOnlyCollection<ISpriteImage> images, SpriteSettings spriteSettings)
         {
             CreateSprite(images, DefaultPlaceholderImages, spriteSettings);
         }
 
-        private MagickImage ImageToMagickImage(IHoverImage image, MagickImage parentImage)
+        private MagickImage ImageToMagickImage(ISpriteImage image)
+        {
+            return ImageToMagickImage(image, null);
+        }
+
+        private MagickImage ImageToMagickImage(IImage image, MagickImage parentImage)
         {
             MagickImage imageForSprite = null;
 
-            if (image is HoverFileImage)
+            if (image is IFileImage)
             {
-                var fileImage = (HoverFileImage)image;
+                var fileImage = (IFileImage)image;
 
                 if (_file.Exists(fileImage.FilePath.FullName))
                 {
-                    imageForSprite = _magickImageHelper.Create(fileImage.FilePath);
-
-                    if (imageForSprite.Height != parentImage.Height || imageForSprite.Width != parentImage.Width)
-                    {
-                        imageForSprite.Resize(new MagickGeometry($"{parentImage.Height}x{parentImage.Width}!"));
-                    }
+                    imageForSprite = _magickImageHelper.Create(fileImage.FilePath);                                        
                 }
             }
-            else if (image is HoverByteArrayImage)
+            else if (image is IByteArrayImage)
             {
-                var byteArrayImage = (HoverByteArrayImage)image;
+                var byteArrayImage = (IByteArrayImage)image;
 
                 if (byteArrayImage.ImageData != null)
                 {
-                    imageForSprite = _magickImageHelper.Create(byteArrayImage.ImageData);
+                    imageForSprite = _magickImageHelper.Create(byteArrayImage.ImageData);                    
+                }
+            }
 
+            if (imageForSprite != null)
+            {
+                if (image is ISpriteImage)
+                {
+                    var spriteImage = (ISpriteImage)image;
+
+                    if (spriteImage.Resize)
+                    {
+                        imageForSprite.Resize(new MagickGeometry($"{spriteImage.ResizeToHeight}x{spriteImage.ResizeToWidth}!"));
+                    }
+                }
+                else if (image is IHoverImage)
+                {
                     if (imageForSprite.Height != parentImage.Height || imageForSprite.Width != parentImage.Width)
                     {
                         imageForSprite.Resize(new MagickGeometry($"{parentImage.Height}x{parentImage.Width}!"));
@@ -88,43 +103,7 @@ namespace DoTheSpriteThing
             }
 
             return imageForSprite;
-        }
-
-        private MagickImage ImageToMagickImage(IImage image)
-        {
-            MagickImage imageForSprite = null;
-
-            if (image is FileImage)
-            {
-                var fileImage = (FileImage)image;
-
-                if (_file.Exists(fileImage.FilePath.FullName))
-                {                    
-                    imageForSprite = _magickImageHelper.Create(fileImage.FilePath);
-
-                    if (fileImage.Resize)
-                    {
-                        imageForSprite.Resize(new MagickGeometry($"{fileImage.ResizeToHeight}x{fileImage.ResizeToWidth}!"));
-                    }                    
-                }                
-            }
-            else if (image is ByteArrayImage)
-            {
-                var byteArrayImage = (ByteArrayImage)image;
-
-                if (byteArrayImage.ImageData != null)
-                {
-                    imageForSprite = _magickImageHelper.Create(byteArrayImage.ImageData);
-                    
-                    if (byteArrayImage.Resize)
-                    {
-                        imageForSprite.Resize(new MagickGeometry($"{byteArrayImage.ResizeToWidth}x{byteArrayImage.ResizeToHeight}!"));
-                    }                    
-                }                
-            }
-
-            return imageForSprite;
-        }
+        }        
 
         /// <summary>
         /// Create a sprite image from a list of images and the CSS to render each image.
@@ -132,7 +111,7 @@ namespace DoTheSpriteThing
         /// <param name="images">The list of images to include in the sprite.</param>
         /// <param name="placeholderImages">The list of custom placeholder images.</param>
         /// <param name="spriteSettings">The settings to use when creating the sprite.</param>
-        public void CreateSprite(IReadOnlyCollection<IImage> images, IReadOnlyCollection<IImage> placeholderImages, SpriteSettings spriteSettings)
+        public void CreateSprite(IReadOnlyCollection<ISpriteImage> images, IReadOnlyCollection<ISpriteImage> placeholderImages, SpriteSettings spriteSettings)
         {
             if (images == null)
             {
@@ -166,7 +145,7 @@ namespace DoTheSpriteThing
                 var css = new StringBuilder();
                 var nextSpriteImageTop = 0;
 
-                foreach (IImage image in images)
+                foreach (ISpriteImage image in images)
                 {
                     var hasImageBeenAddedToSprite = false;
                     int selectedImageHeight;
@@ -189,7 +168,7 @@ namespace DoTheSpriteThing
                     else
                     {
                         string selectedPlaceholderImageKey = placeholderImages.Any(x => x.Key == image.PlaceholderImageKey) ? image.PlaceholderImageKey : placeholderImages.First().Key;
-                        IImage selectedPlaceholderImage = placeholderImages.FirstOrDefault(x => x.Key == selectedPlaceholderImageKey);                                                
+                        ISpriteImage selectedPlaceholderImage = placeholderImages.FirstOrDefault(x => x.Key == selectedPlaceholderImageKey);                                                
                         imageForSprite = ImageToMagickImage(selectedPlaceholderImage);                        
 
                         SpritePlaceholderImage spritePlaceholderImage = spritePlaceholderImages.FirstOrDefault(x => x.Key == selectedPlaceholderImageKey && x.Width == imageForSprite.Width && x.Height == imageForSprite.Height);

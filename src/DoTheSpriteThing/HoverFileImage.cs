@@ -5,7 +5,7 @@ namespace DoTheSpriteThing
     /// <summary>
     /// A file image.
     /// </summary>
-    public class HoverFileImage : IHoverImage
+    public class HoverFileImage : IHoverImage, IFileImage
     {
         /// <summary>
         /// Create the file image.

@@ -3,7 +3,7 @@
     /// <summary>
     /// A byte array image.
     /// </summary>
-    public class ByteArrayImage : IImage, IByteArrayImage
+    public class ByteArraySpriteImage : ISpriteImage, IByteArrayImage
     {
         /// <summary>
         /// Create the byte array image.
@@ -11,7 +11,7 @@
         /// <param name="key">The ID of the HTML element in which to display the image.</param>
         /// <param name="imageData">The image data.</param>
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>        
-        public ByteArrayImage(string key, byte[] imageData, string placeholderImageKey)
+        public ByteArraySpriteImage(string key, byte[] imageData, string placeholderImageKey)
         {
             Key = key;
             ImageData = imageData;
@@ -24,7 +24,7 @@
         /// </summary>
         /// <param name="key">The ID of the HTML element in which to display the image.</param>
         /// <param name="imageData">The image data.</param>        
-        public ByteArrayImage(string key, byte[] imageData)
+        public ByteArraySpriteImage(string key, byte[] imageData)
         {
             Key = key;
             ImageData = imageData;
@@ -39,7 +39,7 @@
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
-        public ByteArrayImage(string key, byte[] imageData, string placeholderImageKey, int resizeToHeight, int resizeToWidth)
+        public ByteArraySpriteImage(string key, byte[] imageData, string placeholderImageKey, int resizeToHeight, int resizeToWidth)
         {
             Key = key;
             ImageData = imageData;
@@ -56,7 +56,7 @@
         /// <param name="imageData">The image data.</param>        
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
-        public ByteArrayImage(string key, byte[] imageData, int resizeToHeight, int resizeToWidth)
+        public ByteArraySpriteImage(string key, byte[] imageData, int resizeToHeight, int resizeToWidth)
         {
             Key = key;
             ImageData = imageData;

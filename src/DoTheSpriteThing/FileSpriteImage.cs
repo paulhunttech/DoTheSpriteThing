@@ -5,14 +5,14 @@ namespace DoTheSpriteThing
     /// <summary>
     /// A file image.
     /// </summary>
-    public class FileImage : IImage, IFileImage
+    public class FileSpriteImage : ISpriteImage, IFileImage
     {
         /// <summary>
         /// Create the file image.
         /// </summary>
         /// <param name="filePath">The path of the image file.</param>
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>        
-        public FileImage(FileInfo filePath, string placeholderImageKey)
+        public FileSpriteImage(FileInfo filePath, string placeholderImageKey)
         {
             FilePath = filePath;
             PlaceholderImageKey = placeholderImageKey;
@@ -23,7 +23,7 @@ namespace DoTheSpriteThing
         /// Create the file image.
         /// </summary>
         /// <param name="filePath">The path of the image file.</param>        
-        public FileImage(FileInfo filePath)
+        public FileSpriteImage(FileInfo filePath)
         {
             FilePath = filePath;
             Resize = false;
@@ -34,7 +34,7 @@ namespace DoTheSpriteThing
         /// </summary>
         /// <param name="filePath">The path of the image file.</param>        
         /// <param name="hoverImage">The image to display when hovering over the image.</param>        
-        public FileImage(FileInfo filePath, IHoverImage hoverImage)
+        public FileSpriteImage(FileInfo filePath, IHoverImage hoverImage)
         {            
             Resize = false;
             FilePath = filePath;
@@ -48,7 +48,7 @@ namespace DoTheSpriteThing
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>        
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
-        public FileImage(FileInfo filePath, string placeholderImageKey, int resizeToHeight, int resizeToWidth)
+        public FileSpriteImage(FileInfo filePath, string placeholderImageKey, int resizeToHeight, int resizeToWidth)
         {        
             Resize = true;
             FilePath = filePath;
@@ -63,7 +63,7 @@ namespace DoTheSpriteThing
         /// <param name="filePath">The path of the image file.</param>        
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
-        public FileImage(FileInfo filePath, int resizeToHeight, int resizeToWidth)
+        public FileSpriteImage(FileInfo filePath, int resizeToHeight, int resizeToWidth)
         {            
             Resize = true;
             FilePath = filePath;

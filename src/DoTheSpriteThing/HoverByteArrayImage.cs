@@ -3,7 +3,7 @@
     /// <summary>
     /// A byte array image.
     /// </summary>
-    public class HoverByteArrayImage : IHoverImage
+    public class HoverByteArrayImage : IHoverImage, IByteArrayImage
     {
         /// <summary>
         /// Create the byte array image.

@@ -18,19 +18,19 @@ namespace DoTheSpriteThing.Testbed.Controllers
         public IActionResult ByteArrays()
         {
             var spriteManager = new SpriteManager();
-            IReadOnlyCollection<IImage> images = new List<IImage>
+            IReadOnlyCollection<ISpriteImage> images = new List<ISpriteImage>
             {
-                new ByteArrayImage("a", System.IO.File.ReadAllBytes(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png")), "noimage1-png"),
-                new ByteArrayImage("b", null, "noimage2-png", 128, 128),
-                new ByteArrayImage("c", null, "noimage1-png", 128, 128),
-                new ByteArrayImage("d", null, "noimage2-png", 128, 128),
-                new ByteArrayImage("e", null, "faceboocksjdncjsdncjds")
+                new ByteArraySpriteImage("a", System.IO.File.ReadAllBytes(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png")), "noimage1-png"),
+                new ByteArraySpriteImage("b", null, "noimage2-png", 128, 128),
+                new ByteArraySpriteImage("c", null, "noimage1-png", 128, 128),
+                new ByteArraySpriteImage("d", null, "noimage2-png", 128, 128),
+                new ByteArraySpriteImage("e", null, "faceboocksjdncjsdncjds")
             };
 
-            IReadOnlyCollection<IImage> placeholderImages = new List<IImage>
+            IReadOnlyCollection<ISpriteImage> placeholderImages = new List<ISpriteImage>
             {
-                new FileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage1.png"))),
-                new FileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage2.png")))
+                new FileSpriteImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage1.png"))),
+                new FileSpriteImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage2.png")))
             };
 
             string spriteFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"images\sprites");
@@ -53,8 +53,8 @@ namespace DoTheSpriteThing.Testbed.Controllers
         {
             var spriteManager = new SpriteManager();
             string imagesFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-            List<FileImage> imageFiles = Directory.GetFiles(imagesFolder).Select(x => new FileImage(new FileInfo(x), 128, 128)).ToList();            
-            imageFiles.Add(new FileImage(new FileInfo("aaaaaaaaaaa"), 128, 128));
+            List<FileSpriteImage> imageFiles = Directory.GetFiles(imagesFolder).Select(x => new FileSpriteImage(new FileInfo(x), 128, 128)).ToList();            
+            imageFiles.Add(new FileSpriteImage(new FileInfo("aaaaaaaaaaa"), 128, 128));
 
             string spriteFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"images\sprites");
 
@@ -75,10 +75,10 @@ namespace DoTheSpriteThing.Testbed.Controllers
         public IActionResult FilesAndByteArrays()
         {
             var spriteManager = new SpriteManager();
-            IReadOnlyCollection<IImage> imageFiles = new List<IImage>
+            IReadOnlyCollection<ISpriteImage> imageFiles = new List<ISpriteImage>
             {
-                new ByteArrayImage("a", System.IO.File.ReadAllBytes(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png")), Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage1.png"), 128, 128),
-                new FileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\bbc.png")), 128, 128)
+                new ByteArraySpriteImage("a", System.IO.File.ReadAllBytes(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png")), Path.Combine(_hostingEnvironment.WebRootPath, @"images\noimage1.png"), 128, 128),
+                new FileSpriteImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\bbc.png")), 128, 128)
             };
 
             string spriteFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"images\sprites");
@@ -100,9 +100,9 @@ namespace DoTheSpriteThing.Testbed.Controllers
         public IActionResult Hover()
         {
             var spriteManager = new SpriteManager();
-            IReadOnlyCollection<IImage> images = new List<IImage>
+            IReadOnlyCollection<ISpriteImage> images = new List<ISpriteImage>
             {
-                new FileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\bbc.png")), new HoverFileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png"))))
+                new FileSpriteImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\bbc.png")), new HoverFileImage(new FileInfo(Path.Combine(_hostingEnvironment.WebRootPath, @"images\facebook.png"))))
             };            
 
             string spriteFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"images\sprites");

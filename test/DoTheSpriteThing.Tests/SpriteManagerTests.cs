@@ -44,10 +44,10 @@ namespace DoTheSpriteThing.Tests
         public void CreateSprite_DuplicateKeysInImagesParam_ShouldThrow()
         {
             // Arrange
-            var images = new List<IImage>
+            var images = new List<ISpriteImage>
             {
-                new ByteArrayImage("a", null),
-                new ByteArrayImage("a", null)
+                new ByteArraySpriteImage("a", null),
+                new ByteArraySpriteImage("a", null)
             };
 
             // Act + Assert
@@ -60,14 +60,14 @@ namespace DoTheSpriteThing.Tests
         public void CreateSprite_DuplicateKeysInPlaceholderImagesParam_ShouldThrow()
         {
             // Arrange
-            var placeholderImages = new List<IImage>
+            var placeholderImages = new List<ISpriteImage>
             {
-                new ByteArrayImage("a", null),
-                new ByteArrayImage("a", null)
+                new ByteArraySpriteImage("a", null),
+                new ByteArraySpriteImage("a", null)
             };
 
             // Act + Assert
-            var exception = Assert.Throws<ArgumentException>(() => _spriteManager.CreateSprite(new List<IImage>(), placeholderImages, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
+            var exception = Assert.Throws<ArgumentException>(() => _spriteManager.CreateSprite(new List<ISpriteImage>(), placeholderImages, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
             Assert.Equal("The list of keys must be unique.\r\nParameter name: placeholderImages", exception.Message);
             Assert.Equal("placeholderImages", exception.ParamName);
         }
@@ -76,7 +76,7 @@ namespace DoTheSpriteThing.Tests
         public void CreateSprite_NullSpriteSettingsParam_ShouldThrow()
         {
             // Act + Assert
-            var exception = Assert.Throws<ArgumentNullException>(() => _spriteManager.CreateSprite(new List<IImage>(), null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => _spriteManager.CreateSprite(new List<ISpriteImage>(), null, null));
             Assert.Equal("spriteSettings", exception.ParamName);
         }
 
@@ -107,10 +107,10 @@ namespace DoTheSpriteThing.Tests
 
             _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((IList<MagickImage> a, string b) => spriteImages.AddRange(a));
 
-            var images = new List<IImage>
+            var images = new List<ISpriteImage>
             {
-                new FileImage(imageFile1),
-                new FileImage(imageFile2)
+                new FileSpriteImage(imageFile1),
+                new FileSpriteImage(imageFile2)
             };
 
             // Act
@@ -145,10 +145,10 @@ namespace DoTheSpriteThing.Tests
 
             _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((IList<MagickImage> a, string b) => spriteImages.AddRange(a));
 
-            var images = new List<IImage>
+            var images = new List<ISpriteImage>
             {
-                new ByteArrayImage("a", imageByteArray1),
-                new ByteArrayImage("b", imageByteArray2),                
+                new ByteArraySpriteImage("a", imageByteArray1),
+                new ByteArraySpriteImage("b", imageByteArray2),                
             };
 
             // Act
@@ -186,10 +186,10 @@ namespace DoTheSpriteThing.Tests
 
             _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((IList<MagickImage> a, string b) => spriteImages.AddRange(a));
 
-            var images = new List<IImage>
+            var images = new List<ISpriteImage>
             {
-                new FileImage(imageFile1), 
-                new ByteArrayImage("b", imageByteArray2)
+                new FileSpriteImage(imageFile1), 
+                new ByteArraySpriteImage("b", imageByteArray2)
             };
 
             // Act
@@ -229,10 +229,10 @@ namespace DoTheSpriteThing.Tests
             _fileMock.Setup(x => x.Exists(imageFile1.FullName)).Returns(true);
             _fileMock.Setup(x => x.Exists(imageFile2.FullName)).Returns(true);            
 
-            var images = new List<IImage>
+            var images = new List<ISpriteImage>
             {
-                new FileImage(imageFile1),
-                new FileImage(imageFile2)
+                new FileSpriteImage(imageFile1),
+                new FileSpriteImage(imageFile2)
             };
 
             // Act
@@ -257,10 +257,10 @@ namespace DoTheSpriteThing.Tests
             _magickImageHelper.Setup(x => x.Create(imageByteArray1)).Returns(magickImage1);
             _magickImageHelper.Setup(x => x.Create(imageByteArray2)).Returns(magickImage2);
 
-            var images = new List<IImage>
+            var images = new List<ISpriteImage>
             {
-                new ByteArrayImage("a", imageByteArray1),
-                new ByteArrayImage("b", imageByteArray2)
+                new ByteArraySpriteImage("a", imageByteArray1),
+                new ByteArraySpriteImage("b", imageByteArray2)
             };
 
             // Act
@@ -290,10 +290,10 @@ namespace DoTheSpriteThing.Tests
 
             _fileMock.Setup(x => x.Exists(imageFile1.FullName)).Returns(true);            
 
-            var images = new List<IImage>
+            var images = new List<ISpriteImage>
             {
-                new FileImage(imageFile1),
-                new ByteArrayImage("b", imageByteArray2)
+                new FileSpriteImage(imageFile1),
+                new ByteArraySpriteImage("b", imageByteArray2)
             };
 
             // Act
@@ -311,9 +311,9 @@ namespace DoTheSpriteThing.Tests
 
             _fileMock.Setup(x => x.Exists(imageFile1.FullName)).Returns(false);
 
-            var images = new List<IImage>
+            var images = new List<ISpriteImage>
             {
-                new FileImage(imageFile1),                
+                new FileSpriteImage(imageFile1),                
             };
             
             byte[] placeholderImageByteArray = Convert.FromBase64String(Image272X100Base64);
@@ -345,9 +345,9 @@ namespace DoTheSpriteThing.Tests
             const string placeholderImageKey1 = "1";
             const string placeholderImageKey2 = "2";
 
-            var images = new List<IImage>
+            var images = new List<ISpriteImage>
             {
-                new FileImage(imageFile1, placeholderImageKey1),
+                new FileSpriteImage(imageFile1, placeholderImageKey1),
             };
 
             byte[] placeholderImageByteArray1 = Convert.FromBase64String(Image272X100Base64);
@@ -359,10 +359,10 @@ namespace DoTheSpriteThing.Tests
 
             _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((IList<MagickImage> a, string b) => spriteImages.AddRange(a));
 
-            var placeholderImages = new List<IImage>
+            var placeholderImages = new List<ISpriteImage>
             {
-                new ByteArrayImage(placeholderImageKey1, placeholderImageByteArray1),
-                new ByteArrayImage(placeholderImageKey2, placeholderImageByteArray2)
+                new ByteArraySpriteImage(placeholderImageKey1, placeholderImageByteArray1),
+                new ByteArraySpriteImage(placeholderImageKey2, placeholderImageByteArray2)
             };
 
             // Act

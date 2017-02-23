@@ -1,6 +1,6 @@
 namespace DoTheSpriteThing
 {
-    public interface IHoverImage
+    public interface IHoverImage : IImage
     {
         string PlaceholderImageKey { get; }
     }
