@@ -1,6 +1,7 @@
 ﻿using System.IO;
+using DoTheSpriteThing.Images.Interfaces;
 
-namespace DoTheSpriteThing
+namespace DoTheSpriteThing.Images
 {
     /// <summary>
     /// A file image.

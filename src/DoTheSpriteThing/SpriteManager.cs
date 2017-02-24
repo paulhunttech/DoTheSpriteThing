@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DoTheSpriteThing.FileProcessors;
+using DoTheSpriteThing.FileProcessors.Interfaces;
+using DoTheSpriteThing.Helpers;
+using DoTheSpriteThing.Images;
+using DoTheSpriteThing.Images.Interfaces;
 using ImageMagick;
 using Thinktecture.IO;
 using Thinktecture.IO.Adapters;
@@ -219,6 +224,25 @@ namespace DoTheSpriteThing
             }
 
             return imageForSprite;
+        }
+
+        private class SpritePlaceholderImage
+        {
+            internal SpritePlaceholderImage(string key, int top, int height, int width)
+            {
+                Key = key;
+                Top = top;
+                Height = height;
+                Width = width;
+            }
+
+            internal int Height { get; }
+
+            internal string Key { get; }
+
+            internal int Top { get; }
+
+            internal int Width { get; }
         }
     }
 }

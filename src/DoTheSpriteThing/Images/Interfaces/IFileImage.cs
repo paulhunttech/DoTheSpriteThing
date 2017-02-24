@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace DoTheSpriteThing
+namespace DoTheSpriteThing.Images.Interfaces
 {
     public interface IFileImage
     {

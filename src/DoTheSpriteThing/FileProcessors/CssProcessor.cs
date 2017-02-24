@@ -1,6 +1,7 @@
 using System.IO;
+using DoTheSpriteThing.FileProcessors.Interfaces;
 
-namespace DoTheSpriteThing
+namespace DoTheSpriteThing.FileProcessors
 {
     internal class CssProcessor : ICssProcessor
     {

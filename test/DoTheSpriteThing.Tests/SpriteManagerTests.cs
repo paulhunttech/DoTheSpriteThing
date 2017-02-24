@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using DoTheSpriteThing.FileProcessors.Interfaces;
+using DoTheSpriteThing.Helpers;
+using DoTheSpriteThing.Images;
+using DoTheSpriteThing.Images.Interfaces;
 using ImageMagick;
 using Moq;
 using Thinktecture.IO;

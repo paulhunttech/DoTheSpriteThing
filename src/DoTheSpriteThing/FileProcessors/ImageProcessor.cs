@@ -1,6 +1,7 @@
+using DoTheSpriteThing.FileProcessors.Interfaces;
 using ImageMagick;
 
-namespace DoTheSpriteThing
+namespace DoTheSpriteThing.FileProcessors
 {
     internal class ImageProcessor : IImageProcessor
     {

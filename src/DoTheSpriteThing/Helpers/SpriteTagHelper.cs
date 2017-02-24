@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace DoTheSpriteThing
+namespace DoTheSpriteThing.Helpers
 {
     [HtmlTargetElement("spriteimg")]
     public class SpriteTagHelper : TagHelper

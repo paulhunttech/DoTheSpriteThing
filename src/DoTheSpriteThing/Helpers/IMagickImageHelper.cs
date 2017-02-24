@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using ImageMagick;
 
-namespace DoTheSpriteThing
+namespace DoTheSpriteThing.Helpers
 {
     public interface IMagickImageHelper
     {

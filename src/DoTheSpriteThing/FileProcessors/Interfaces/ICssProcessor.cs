@@ -1,4 +1,4 @@
-namespace DoTheSpriteThing
+namespace DoTheSpriteThing.FileProcessors.Interfaces
 {
     internal interface ICssProcessor
     {

@@ -1,4 +1,6 @@
-﻿namespace DoTheSpriteThing
+﻿using DoTheSpriteThing.Images.Interfaces;
+
+namespace DoTheSpriteThing.Images
 {
     /// <summary>
     /// A byte array image.

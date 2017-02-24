@@ -1,4 +1,4 @@
-namespace DoTheSpriteThing
+namespace DoTheSpriteThing.Images.Interfaces
 {
     public interface IHoverImage : IImage
     {
