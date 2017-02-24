@@ -97,7 +97,7 @@ namespace DoTheSpriteThing
             using (var spriteImages = new MagickImageCollection())
             {
                 var css = new StringBuilder();
-                var nextSpriteImageTop = 0;
+                var nextSpriteImageTop = 0;                
 
                 foreach (ISpriteImage image in images)
                 {
@@ -141,7 +141,8 @@ namespace DoTheSpriteThing
                         selectedImageWidth = spritePlaceholderImage.Width;
                     }
 
-                    css.AppendLine($"#{image.Key} {{ height: {selectedImageHeight}px; width: {selectedImageWidth}px; background-image: url('{spriteSettings.SpriteUrl}'); background-position: 0px -{selectedImageTop}px; }}");
+                    string selectedImageTopText = selectedImageTop != 0 ? $"-{selectedImageTop}px" : "0";
+                    css.Append($"#{image.Key}{{height:{selectedImageHeight}px;width:{selectedImageWidth}px;background:url('{spriteSettings.SpriteUrl}') 0 {selectedImageTopText};}}");
 
                     if (hasImageBeenAddedToSprite)
                     {
@@ -161,7 +162,8 @@ namespace DoTheSpriteThing
                             selectedHoverImageWidth = hoverImageForSprite.Width;
                         }
 
-                        css.AppendLine($"#{image.Key}:hover {{ height: {selectedHoverImageHeight}px; width: {selectedHoverImageWidth}px; background-image: url('{spriteSettings.SpriteUrl}'); background-position: 0px -{selectedHoverImageTop}px; }}");
+                        string selectedHoverImageTopText = selectedHoverImageTop != 0 ? $"-{selectedHoverImageTop}px" : "0";
+                        css.Append($"#{image.Key}:hover{{height:{selectedHoverImageHeight}px;width:{selectedHoverImageWidth}px;background:url('{spriteSettings.SpriteUrl}') 0 {selectedHoverImageTopText};}}");
 
                         if (hasImageBeenAddedToSprite)
                         {

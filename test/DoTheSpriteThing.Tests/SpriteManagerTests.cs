@@ -181,7 +181,7 @@ namespace DoTheSpriteThing.Tests
             _spriteManager.CreateSprite(images, null, new SpriteSettings(@"c:\sprite.png", spriteUrl, cssFilename));
 
             // Assert
-            _cssProcessorMock.Verify(x => x.CreateCss($"#a {{ height: 175px; width: 252px; background-image: url('{spriteUrl}'); background-position: 0px -0px; }}\r\n#b {{ height: 56px; width: 100px; background-image: url('{spriteUrl}'); background-position: 0px -175px; }}\r\n", cssFilename));
+            _cssProcessorMock.Verify(x => x.CreateCss($"#a{{height:175px;width:252px;background:url('{spriteUrl}') 0 0;}}#b{{height:56px;width:100px;background:url('{spriteUrl}') 0 -175px;}}", cssFilename));
         }
 
         [Fact]
@@ -254,7 +254,7 @@ namespace DoTheSpriteThing.Tests
             _spriteManager.CreateSprite(images, null, new SpriteSettings(@"c:\sprite.png", spriteUrl, cssFilename));
 
             // Assert
-            _cssProcessorMock.Verify(x => x.CreateCss($"#a-png {{ height: {image1Height}px; width: {image1Width}px; background-image: url('{spriteUrl}'); background-position: 0px -0px; }}\r\n#b-png {{ height: {image2Height}px; width: {image2Width}px; background-image: url('{spriteUrl}'); background-position: 0px -{image1Height}px; }}\r\n", cssFilename));
+            _cssProcessorMock.Verify(x => x.CreateCss($"#a-png{{height:{image1Height}px;width:{image1Width}px;background:url('{spriteUrl}') 0 0;}}#b-png{{height:{image2Height}px;width:{image2Width}px;background:url('{spriteUrl}') 0 -{image1Height}px;}}", cssFilename));
         }
 
         [Fact]
@@ -334,7 +334,7 @@ namespace DoTheSpriteThing.Tests
             _spriteManager.CreateSprite(images, null, new SpriteSettings(@"c:\sprite.png", spriteUrl, cssFilename));
 
             // Assert
-            _cssProcessorMock.Verify(x => x.CreateCss($"#a-png {{ height: {image1Height}px; width: {image1Width}px; background-image: url('{spriteUrl}'); background-position: 0px -0px; }}\r\n#b {{ height: 56px; width: 100px; background-image: url('{spriteUrl}'); background-position: 0px -{image1Height}px; }}\r\n", cssFilename));
+            _cssProcessorMock.Verify(x => x.CreateCss($"#a-png{{height:{image1Height}px;width:{image1Width}px;background:url('{spriteUrl}') 0 0;}}#b{{height:56px;width:100px;background:url('{spriteUrl}') 0 -{image1Height}px;}}", cssFilename));
         }
 
         [Fact]
