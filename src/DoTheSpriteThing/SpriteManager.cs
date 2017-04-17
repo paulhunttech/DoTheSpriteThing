@@ -215,6 +215,8 @@ namespace DoTheSpriteThing
                     {
                         imageForSprite.Resize(new MagickGeometry($"{spriteImage.ResizeToHeight}x{spriteImage.ResizeToWidth}!"));
                     }
+
+                    imageForSprite.Quality = spriteImage.Quality;
                 }
                 else if (image is IHoverImage)
                 {
@@ -222,8 +224,12 @@ namespace DoTheSpriteThing
                     {
                         imageForSprite.Resize(new MagickGeometry($"{parentImage.Height}x{parentImage.Width}!"));
                     }
+
+                    imageForSprite.Quality = parentImage.Quality;
                 }
-            }
+
+                imageForSprite.Strip();
+            }            
 
             return imageForSprite;
         }

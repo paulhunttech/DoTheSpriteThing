@@ -1,5 +1,1 @@
-#a { height: 250px; width: 250px; background-image: url('../images/sprites/bytearrays-sprite.png'); background-position: 0px -0px; }
-#b { height: 533px; width: 800px; background-image: url('../images/sprites/bytearrays-sprite.png'); background-position: 0px -250px; }
-#c { height: 600px; width: 600px; background-image: url('../images/sprites/bytearrays-sprite.png'); background-position: 0px -783px; }
-#d { height: 533px; width: 800px; background-image: url('../images/sprites/bytearrays-sprite.png'); background-position: 0px -250px; }
-#e { height: 600px; width: 600px; background-image: url('../images/sprites/bytearrays-sprite.png'); background-position: 0px -783px; }
+#a{height:250px;width:250px;background:url('../images/sprites/bytearrays-sprite.png') 0 0;}#b{height:533px;width:800px;background:url('../images/sprites/bytearrays-sprite.png') 0 -250px;}#c{height:600px;width:600px;background:url('../images/sprites/bytearrays-sprite.png') 0 -783px;}#d{height:533px;width:800px;background:url('../images/sprites/bytearrays-sprite.png') 0 -250px;}#e{height:600px;width:600px;background:url('../images/sprites/bytearrays-sprite.png') 0 -783px;}

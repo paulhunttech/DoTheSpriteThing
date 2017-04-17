@@ -51,10 +51,10 @@ namespace DoTheSpriteThing.Testbed.Controllers
             return View();
         }
 
-        public IActionResult Files()
+        public IActionResult FilesPng()
         {
             var spriteManager = new SpriteManager();
-            string imagesFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+            string imagesFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images", "png");
             List<FileSpriteImage> imageFiles = Directory.GetFiles(imagesFolder).Select(x => new FileSpriteImage(new FileInfo(x), 128, 128)).ToList();
             imageFiles.Add(new FileSpriteImage(new FileInfo("aaaaaaaaaaa"), 128, 128));
 
@@ -67,6 +67,29 @@ namespace DoTheSpriteThing.Testbed.Controllers
 
             string spriteFilename = Path.Combine(spriteFolder, "files-sprite.png");
             const string spriteUrl = "../images/sprites/files-sprite.png";
+            string cssFilename = Path.Combine(_hostingEnvironment.WebRootPath, @"css\files-sprite.css");
+
+            spriteManager.CreateSprite(imageFiles, new SpriteSettings(spriteFilename, spriteUrl, cssFilename));
+
+            return View();
+        }
+
+        public IActionResult FilesJpg()
+        {
+            var spriteManager = new SpriteManager();
+            string imagesFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images", "jpg");
+            List<FileSpriteImage> imageFiles = Directory.GetFiles(imagesFolder).Select(x => new FileSpriteImage(new FileInfo(x), 128, 128)).ToList();
+            imageFiles.Add(new FileSpriteImage(new FileInfo("aaaaaaaaaaa"), 128, 128));
+
+            string spriteFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"images\sprites");
+
+            if (!Directory.Exists(spriteFolder))
+            {
+                Directory.CreateDirectory(spriteFolder);
+            }
+
+            string spriteFilename = Path.Combine(spriteFolder, "files-sprite.jpg");
+            const string spriteUrl = "../images/sprites/files-sprite.jpg";
             string cssFilename = Path.Combine(_hostingEnvironment.WebRootPath, @"css\files-sprite.css");
 
             spriteManager.CreateSprite(imageFiles, new SpriteSettings(spriteFilename, spriteUrl, cssFilename));

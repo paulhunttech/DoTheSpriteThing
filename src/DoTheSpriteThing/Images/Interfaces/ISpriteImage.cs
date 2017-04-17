@@ -13,5 +13,7 @@ namespace DoTheSpriteThing.Images.Interfaces
         int ResizeToHeight { get; }
 
         int ResizeToWidth { get; }
+
+        int Quality { get; }
     }
 }
