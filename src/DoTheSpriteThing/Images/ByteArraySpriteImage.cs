@@ -29,6 +29,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="imageData">The image data.</param>
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>
         /// <param name="quality">The quality of the image.</param>        
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, string placeholderImageKey, int quality)
         {
             Key = key;
@@ -45,6 +46,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="imageData">The image data.</param>
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>   
         /// <param name="hoverImage">The image to display when hovering over the image.</param>             
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, string placeholderImageKey, IHoverImage hoverImage)
         {
             Key = key;
@@ -63,6 +65,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>   
         /// <param name="hoverImage">The image to display when hovering over the image.</param>
         /// <param name="quality">The quality of the image.</param>             
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, string placeholderImageKey, IHoverImage hoverImage, int quality)
         {
             Key = key;
@@ -92,6 +95,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="key">The ID of the HTML element in which to display the image.</param>
         /// <param name="imageData">The image data.</param>
         /// <param name="quality">The quality of the image.</param>        
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, int quality)
         {
             Key = key;
@@ -106,6 +110,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="key">The ID of the HTML element in which to display the image.</param>
         /// <param name="imageData">The image data.</param>
         /// <param name="hoverImage">The image to display when hovering over the image.</param>             
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, IHoverImage hoverImage)
         {
             Key = key;
@@ -122,6 +127,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="imageData">The image data.</param>
         /// <param name="hoverImage">The image to display when hovering over the image.</param>
         /// <param name="quality">The quality of the image.</param>             
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, IHoverImage hoverImage, int quality)
         {
             Key = key;
@@ -159,6 +165,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="quality">The quality of the image.</param>
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, string placeholderImageKey, int resizeToHeight, int resizeToWidth, int quality)
         {
             Key = key;
@@ -179,6 +186,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="hoverImage">The image to display when hovering over the image.</param> 
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, string placeholderImageKey, int resizeToHeight, int resizeToWidth, IHoverImage hoverImage)
         {
             Key = key;
@@ -201,6 +209,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="hoverImage">The image to display when hovering over the image.</param>
         /// <param name="quality">The quality of the image.</param> 
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, string placeholderImageKey, int resizeToHeight, int resizeToWidth, IHoverImage hoverImage, int quality)
         {
             Key = key;
@@ -220,6 +229,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="imageData">The image data.</param>        
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, int resizeToHeight, int resizeToWidth)
         {
             Key = key;
@@ -238,6 +248,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="quality">The quality of the image.</param>
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, int resizeToHeight, int resizeToWidth, int quality)
         {
             Key = key;
@@ -256,6 +267,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="hoverImage">The image to display when hovering over the image.</param> 
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, int resizeToHeight, int resizeToWidth, IHoverImage hoverImage)
         {
             Key = key;
@@ -276,6 +288,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="hoverImage">The image to display when hovering over the image.</param>
         /// <param name="quality">The quality of the image.</param> 
+        // ReSharper disable once UnusedMember.Global
         public ByteArraySpriteImage(string key, byte[] imageData, int resizeToHeight, int resizeToWidth, IHoverImage hoverImage, int quality)
         {
             Key = key;

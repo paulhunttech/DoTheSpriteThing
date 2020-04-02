@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 namespace DoTheSpriteThing.Helpers
 {
     [HtmlTargetElement("spriteimg")]
+    // ReSharper disable once UnusedMember.Global
     public class SpriteTagHelper : TagHelper
     {
         public string SpriteImageId { get; set; }

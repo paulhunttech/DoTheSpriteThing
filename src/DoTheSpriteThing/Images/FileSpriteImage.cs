@@ -27,6 +27,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="filePath">The path of the image file.</param>
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>
         /// <param name="quality">The quality of the image.</param>        
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, string placeholderImageKey, int quality)
         {
             FilePath = filePath;
@@ -41,6 +42,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="filePath">The path of the image file.</param>
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>   
         /// <param name="hoverImage">The image to display when hovering over the image.</param>             
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, string placeholderImageKey, IHoverImage hoverImage)
         {
             FilePath = filePath;
@@ -57,6 +59,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>   
         /// <param name="hoverImage">The image to display when hovering over the image.</param>
         /// <param name="quality">The quality of the image.</param>             
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, string placeholderImageKey, IHoverImage hoverImage, int quality)
         {
             FilePath = filePath;
@@ -82,6 +85,7 @@ namespace DoTheSpriteThing.Images
         /// </summary>
         /// <param name="filePath">The path of the image file.</param>
         /// <param name="quality">The quality of the image.</param>        
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, int quality)
         {
             FilePath = filePath;
@@ -108,6 +112,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="filePath">The path of the image file.</param>        
         /// <param name="hoverImage">The image to display when hovering over the image.</param>
         /// <param name="quality">The quality of the image.</param>        
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, IHoverImage hoverImage, int quality)
         {
             Resize = false;
@@ -123,6 +128,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>        
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, string placeholderImageKey, int resizeToHeight, int resizeToWidth)
         {
             Resize = true;
@@ -141,6 +147,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="quality">The quality of the image.</param>
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, string placeholderImageKey, int resizeToHeight, int resizeToWidth, int quality)
         {
             Resize = true;
@@ -159,6 +166,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="hoverImage">The image to display when hovering over the image.</param>        
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, string placeholderImageKey, int resizeToHeight, int resizeToWidth, IHoverImage hoverImage)
         {
             Resize = true;
@@ -179,6 +187,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="hoverImage">The image to display when hovering over the image.</param>
         /// <param name="quality">The quality of the image.</param>        
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, string placeholderImageKey, int resizeToHeight, int resizeToWidth, IHoverImage hoverImage, int quality)
         {
             Resize = true;
@@ -212,6 +221,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="quality">The quality of the image.</param>        
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, int resizeToHeight, int resizeToWidth, int quality)
         {
             Resize = true;
@@ -228,6 +238,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToHeight">The height in pixels to resize the image to.</param>
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="hoverImage">The image to display when hovering over the image.</param>        
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, int resizeToHeight, int resizeToWidth, IHoverImage hoverImage)
         {
             Resize = true;
@@ -246,6 +257,7 @@ namespace DoTheSpriteThing.Images
         /// <param name="resizeToWidth">The width in pixels to resize the image to.</param>
         /// <param name="hoverImage">The image to display when hovering over the image.</param>
         /// <param name="quality">The quality of the image.</param>        
+        // ReSharper disable once UnusedMember.Global
         public FileSpriteImage(FileInfo filePath, int resizeToHeight, int resizeToWidth, IHoverImage hoverImage, int quality)
         {
             Resize = true;

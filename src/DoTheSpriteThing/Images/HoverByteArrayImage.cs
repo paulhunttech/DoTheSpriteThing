@@ -5,6 +5,7 @@ namespace DoTheSpriteThing.Images
     /// <summary>
     /// A byte array image.
     /// </summary>
+    // ReSharper disable once UnusedMember.Global
     public class HoverByteArrayImage : IHoverImage, IByteArrayImage
     {
         /// <summary>

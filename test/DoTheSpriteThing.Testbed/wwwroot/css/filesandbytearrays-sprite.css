@@ -1,2 +1,1 @@
-#a { height: 128px; width: 128px; background-image: url('../images/sprites/filesandbytearrays-sprite.png'); background-position: 0px -0px; }
-#bbc-png { height: 128px; width: 128px; background-image: url('../images/sprites/filesandbytearrays-sprite.png'); background-position: 0px -128px; }
+#a{height:128px;width:128px;background:url('../images/sprites/filesandbytearrays-sprite.png') 0 0;}#bbc-png{height:175px;width:252px;background:url('../images/sprites/filesandbytearrays-sprite.png') 0 -128px;}

@@ -13,6 +13,7 @@ namespace DoTheSpriteThing.Images
         /// </summary>
         /// <param name="filePath">The path of the image file.</param>
         /// <param name="placeholderImageKey">The key of the placeholder image to use when image data is null.</param>        
+        // ReSharper disable once UnusedMember.Global
         public HoverFileImage(FileInfo filePath, string placeholderImageKey)
         {
             FilePath = filePath;
