@@ -3,11 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>DoTheSpriteThing</AssemblyName>
-    <PackageId>DoTheSpriteThing</PackageId>
+    <PackageId>do-the-sprite-thing</PackageId>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <Authors>Paul Hunt</Authors>
+    <Description>Do The Sprite Thing is a library for generating sprites for ASP.NET Core websites.</Description>
+    <PackageLicenseExpression>https://opensource.org/licenses/LGPL-3.0</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/pahunt78/DoTheSpriteThing</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
