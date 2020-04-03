@@ -6,7 +6,6 @@
     <AssemblyName>DoTheSpriteThing.Testbed</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>DoTheSpriteThing.Testbed</PackageId>
-    <PackageTargetFallback>$(PackageTargetFallback);portable-net451+win8</PackageTargetFallback>
   </PropertyGroup>
 
   <ItemGroup>
