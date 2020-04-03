@@ -28,9 +28,6 @@ steps:
     command: 'pack'
     packagesToPack: '$(packageProjectPath)'
     nobuild: true
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '6'
-    minorVersion: '0'
-    patchVersion: '0'
+    versioningScheme: 'off'    
 - task: PublishBuildArtifacts@1
   displayName: 'Publish deployment artifacts'
