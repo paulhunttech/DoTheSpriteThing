@@ -10,7 +10,7 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <Authors>Paul Hunt</Authors>
     <Description>Do The Sprite Thing is a library for generating sprites for ASP.NET Core websites.</Description>
-    <PackageLicenseExpression>https://opensource.org/licenses/LGPL-3.0</PackageLicenseExpression>
+    <PackageLicenseExpression></PackageLicenseExpression>
     <RepositoryUrl>https://github.com/pahunt78/DoTheSpriteThing</RepositoryUrl>
   </PropertyGroup>
 
