@@ -20,8 +20,15 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration) --no-restore
   displayName: 'Build'    
 - script: dotnet test $(testsProjectPath) --configuration $(buildConfiguration) --filter TestCategory!=AutomationTests --no-build
-  displayName: 'Run tests'    
-- script: dotnet publish $(packageProjectPath) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/Package --no-build
-  displayName: 'Publish package'
+  displayName: 'Run tests'  
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '$(packageProjectPath)'
+    nobuild: true
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '6'
+    minorVersion: '0'
+    patchVersion: '0'
 - task: PublishBuildArtifacts@1
   displayName: 'Publish deployment artifacts'
