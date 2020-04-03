@@ -13,6 +13,7 @@ variables:
   
 steps:
 - task: DotNetCoreCLI@2
+  displayName: 'Restore'
   inputs:
     command: 'restore'
     feedsToUse: 'select'
@@ -22,13 +23,11 @@ steps:
 - script: dotnet test $(testsProjectPath) --configuration $(buildConfiguration) --filter TestCategory!=AutomationTests --no-build
   displayName: 'Run tests'  
 - task: DotNetCoreCLI@2
+  displayName: 'Pack'
   inputs:
     command: 'pack'
     packagesToPack: '$(packageProjectPath)'
     nobuild: true
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '6'
-    minorVersion: '0'
-    patchVersion: '0'
+    versioningScheme: 'off'    
 - task: PublishBuildArtifacts@1
   displayName: 'Publish deployment artifacts'
