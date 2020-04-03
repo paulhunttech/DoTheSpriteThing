@@ -1,33 +1,32 @@
-# .NET Desktop
-# Build and run tests for .NET Desktop or Windows classic desktop solutions.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
-
 trigger:
-- master
-
+  branches:
+    include:
+    - master
+  
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'windows-2019'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-
+  packageProjectPath: 'src\DoTheSpriteThing\DoTheSpriteThing.csproj'
+  testsProjectPath: 'test\DoTheSpriteThing.Tests\DoTheSpriteThing.Tests.csproj'
+  
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
+  displayName: 'Restore dependencies'
   inputs:
-    restoreSolution: '$(solution)'
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'restore'
+    projects: |
+      $(packageProjectPath)
+      $(testsProjectPath)
+    feedsToUse: 'select'
+    vstsFeed: '/6a974ad4-691c-4139-ab48-af9c2c69a028'
+    verbosityRestore: 'Normal'
+- script: dotnet build --configuration $(buildConfiguration) --no-restore
+  displayName: 'Build'    
+- script: dotnet test $(testsProjectPath) --configuration $(buildConfiguration) --filter TestCategory!=AutomationTests --no-build
+  displayName: 'Run tests'    
+- script: dotnet publish $(packageProjectPath) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/Package --no-build
+  displayName: 'Publish package'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish deployment artifacts'
