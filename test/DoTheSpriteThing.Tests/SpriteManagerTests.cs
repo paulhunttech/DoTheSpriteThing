@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using DoTheSpriteThing.FileProcessors.Interfaces;
 using DoTheSpriteThing.Helpers;
@@ -86,9 +87,9 @@ namespace DoTheSpriteThing.Tests
 
             _magickImageHelper.Setup(x => x.Create(It.IsAny<byte[]>())).Returns(new MagickImage(placeholderImageByteArray));
 
-            var spriteImages = new List<MagickImage>();
+            var spriteImages = new List<IMagickImage>();
 
-            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((IList<MagickImage> a, string b) => spriteImages.AddRange(a));
+            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((MagickImageCollection a, string b) => spriteImages.AddRange(a));
 
             // Act
             _spriteManager.CreateSprite(images, null, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css"));
@@ -121,9 +122,9 @@ namespace DoTheSpriteThing.Tests
 
             _magickImageHelper.Setup(x => x.Create(It.IsAny<byte[]>())).Returns(new MagickImage(placeholderImageByteArray2));
 
-            var spriteImages = new List<MagickImage>();
+            var spriteImages = new List<IMagickImage>();
 
-            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((IList<MagickImage> a, string b) => spriteImages.AddRange(a));
+            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((MagickImageCollection a, string b) => spriteImages.AddRange(a));
 
             var placeholderImages = new List<ISpriteImage>
             {
@@ -199,9 +200,9 @@ namespace DoTheSpriteThing.Tests
             _magickImageHelper.Setup(x => x.Create(imageByteArray1)).Returns(magickImage1);
             _magickImageHelper.Setup(x => x.Create(imageByteArray2)).Returns(magickImage2);
 
-            var spriteImages = new List<MagickImage>();
+            var spriteImages = new List<IMagickImage>();
 
-            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((IList<MagickImage> a, string b) => spriteImages.AddRange(a));
+            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((MagickImageCollection a, string b) => spriteImages.AddRange(a));
 
             var images = new List<ISpriteImage>
             {
@@ -281,9 +282,9 @@ namespace DoTheSpriteThing.Tests
             _fileMock.Setup(x => x.Exists(imageFile1.FullName)).Returns(true);
             _fileMock.Setup(x => x.Exists(imageFile2.FullName)).Returns(true);
 
-            var spriteImages = new List<MagickImage>();
+            var spriteImages = new List<IMagickImage>();
 
-            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((IList<MagickImage> a, string b) => spriteImages.AddRange(a));
+            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((MagickImageCollection a, string b) => spriteImages.AddRange(a));
 
             var images = new List<ISpriteImage>
             {
@@ -357,9 +358,9 @@ namespace DoTheSpriteThing.Tests
 
             _fileMock.Setup(x => x.Exists(imageFile1.FullName)).Returns(true);
 
-            var spriteImages = new List<MagickImage>();
+            var spriteImages = new List<IMagickImage>();
 
-            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((IList<MagickImage> a, string b) => spriteImages.AddRange(a));
+            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((MagickImageCollection a, string b) => spriteImages.AddRange(a));
 
             var images = new List<ISpriteImage>
             {

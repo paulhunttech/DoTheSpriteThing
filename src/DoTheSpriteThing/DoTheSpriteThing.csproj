@@ -16,8 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cake" Version="0.37.0" />
-    <PackageReference Include="Magick.NET.Core-Q8" Version="7.0.4.400" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.15.5" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.2.0" />
     <PackageReference Include="Thinktecture.IO.FileSystem.Abstractions" Version="2.4.0" />
   </ItemGroup>
