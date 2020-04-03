@@ -12,6 +12,7 @@
     <Description>Do The Sprite Thing is a library for generating sprites for ASP.NET Core websites.</Description>
     <PackageLicenseExpression></PackageLicenseExpression>
     <RepositoryUrl>https://github.com/pahunt78/DoTheSpriteThing</RepositoryUrl>
+    <Version>6.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
