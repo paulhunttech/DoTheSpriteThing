@@ -13,15 +13,10 @@ variables:
   
 steps:
 - task: DotNetCoreCLI@2
-  displayName: 'Restore dependencies'
   inputs:
     command: 'restore'
-    projects: |
-      $(packageProjectPath)
-      $(testsProjectPath)
     feedsToUse: 'select'
-    vstsFeed: '/6a974ad4-691c-4139-ab48-af9c2c69a028'
-    verbosityRestore: 'Normal'
+    vstsFeed: '6a974ad4-691c-4139-ab48-af9c2c69a028'
 - script: dotnet build --configuration $(buildConfiguration) --no-restore
   displayName: 'Build'    
 - script: dotnet test $(testsProjectPath) --configuration $(buildConfiguration) --filter TestCategory!=AutomationTests --no-build
