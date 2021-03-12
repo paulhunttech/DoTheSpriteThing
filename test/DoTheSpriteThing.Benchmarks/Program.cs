@@ -12,9 +12,9 @@ namespace DoTheSpriteThing.Benchmarks
         public static void Main(string[] args)
         {
             var images = new List<FileSpriteImage>();            
-            string[] imageFilenames = Directory.GetFiles(@"..\DoTheSpriteThing.Testbed\wwwroot\images");            
+            var imageFilenames = Directory.GetFiles(@"..\DoTheSpriteThing.Testbed\wwwroot\images");            
 
-            foreach (string imageFilename in imageFilenames)
+            foreach (var imageFilename in imageFilenames)
             {
                 images.Add(new FileSpriteImage(new FileInfo(imageFilename)));
             }
@@ -24,8 +24,8 @@ namespace DoTheSpriteThing.Benchmarks
 
             for (var i = 0; i < 20; i++)
             {
-                Stopwatch stopwatch = Stopwatch.StartNew();
-                spriteManager.CreateSprite(images, new SpriteSettings("sprite.png", "/sprite.png", "sprite.css"));
+                var stopwatch = Stopwatch.StartNew();
+                spriteManager.CreateSprite(images, new FileSystemSpriteSettings("sprite.png", "/sprite.png", "sprite.css"));
                 stopwatch.Stop();
                 runTimes.Add(stopwatch.ElapsedMilliseconds);
                 Console.WriteLine($"Execution {i} time: {stopwatch.ElapsedMilliseconds}ms");

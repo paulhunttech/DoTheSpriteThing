@@ -35,18 +35,18 @@ namespace DoTheSpriteThing.Testbed.Controllers
                 new FileSpriteImage(new FileInfo(Path.Combine(_webRootPath, @"images\png\noimage2.png")))
             };
 
-            string spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
+            var spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
 
             if (!Directory.Exists(spriteFolder))
             {
                 Directory.CreateDirectory(spriteFolder);
             }
 
-            string spriteFilename = Path.Combine(spriteFolder, "bytearrays-sprite.png");
+            var spriteFilename = Path.Combine(spriteFolder, "bytearrays-sprite.png");
             const string spriteUrl = "../images/sprites/bytearrays-sprite.png";
-            string cssFilename = Path.Combine(_webRootPath, @"css\bytearrays-sprite.css");
+            var cssFilename = Path.Combine(_webRootPath, @"css\bytearrays-sprite.css");
 
-            spriteManager.CreateSprite(images, placeholderImages, new SpriteSettings(spriteFilename, spriteUrl, cssFilename));
+            spriteManager.CreateSprite(images, placeholderImages, new FileSystemSpriteSettings(spriteFilename, spriteUrl, cssFilename));
 
             return View();
         }
@@ -54,22 +54,22 @@ namespace DoTheSpriteThing.Testbed.Controllers
         public IActionResult FilesPng()
         {
             var spriteManager = new SpriteManager();
-            string imagesFolder = Path.Combine(_webRootPath, "images", "png");
-            List<FileSpriteImage> imageFiles = Directory.GetFiles(imagesFolder).Select(x => new FileSpriteImage(new FileInfo(x), 128, 128)).ToList();
+            var imagesFolder = Path.Combine(_webRootPath, "images", "png");
+            var imageFiles = Directory.GetFiles(imagesFolder).Select(x => new FileSpriteImage(new FileInfo(x), 128, 128)).ToList();
             imageFiles.Add(new FileSpriteImage(new FileInfo("aaaaaaaaaaa"), 128, 128));
 
-            string spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
+            var spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
 
             if (!Directory.Exists(spriteFolder))
             {
                 Directory.CreateDirectory(spriteFolder);
             }
 
-            string spriteFilename = Path.Combine(spriteFolder, "files-sprite.png");
+            var spriteFilename = Path.Combine(spriteFolder, "files-sprite.png");
             const string spriteUrl = "../images/sprites/files-sprite.png";
-            string cssFilename = Path.Combine(_webRootPath, @"css\files-sprite.css");
+            var cssFilename = Path.Combine(_webRootPath, @"css\files-sprite.css");
 
-            spriteManager.CreateSprite(imageFiles, new SpriteSettings(spriteFilename, spriteUrl, cssFilename));
+            spriteManager.CreateSprite(imageFiles, new FileSystemSpriteSettings(spriteFilename, spriteUrl, cssFilename));
 
             return View();
         }
@@ -77,22 +77,22 @@ namespace DoTheSpriteThing.Testbed.Controllers
         public IActionResult FilesJpg()
         {
             var spriteManager = new SpriteManager();
-            string imagesFolder = Path.Combine(_webRootPath, "images", "jpg");
-            List<FileSpriteImage> imageFiles = Directory.GetFiles(imagesFolder).Select(x => new FileSpriteImage(new FileInfo(x), 128, 128)).ToList();
+            var imagesFolder = Path.Combine(_webRootPath, "images", "jpg");
+            var imageFiles = Directory.GetFiles(imagesFolder).Select(x => new FileSpriteImage(new FileInfo(x), 128, 128)).ToList();
             imageFiles.Add(new FileSpriteImage(new FileInfo("aaaaaaaaaaa"), 128, 128));
 
-            string spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
+            var spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
 
             if (!Directory.Exists(spriteFolder))
             {
                 Directory.CreateDirectory(spriteFolder);
             }
 
-            string spriteFilename = Path.Combine(spriteFolder, "files-sprite.jpg");
+            var spriteFilename = Path.Combine(spriteFolder, "files-sprite.jpg");
             const string spriteUrl = "../images/sprites/files-sprite.jpg";
-            string cssFilename = Path.Combine(_webRootPath, @"css\files-sprite.css");
+            var cssFilename = Path.Combine(_webRootPath, @"css\files-sprite.css");
 
-            spriteManager.CreateSprite(imageFiles, new SpriteSettings(spriteFilename, spriteUrl, cssFilename));
+            spriteManager.CreateSprite(imageFiles, new FileSystemSpriteSettings(spriteFilename, spriteUrl, cssFilename));
 
             return View();
         }
@@ -106,18 +106,18 @@ namespace DoTheSpriteThing.Testbed.Controllers
                 new FileSpriteImage(new FileInfo(Path.Combine(_webRootPath, @"images\bbc.png")), 128, 128)
             };
 
-            string spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
+            var spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
 
             if (!Directory.Exists(spriteFolder))
             {
                 Directory.CreateDirectory(spriteFolder);
             }
 
-            string spriteFilename = Path.Combine(spriteFolder, "filesandbytearrays-sprite.png");
+            var spriteFilename = Path.Combine(spriteFolder, "filesandbytearrays-sprite.png");
             const string spriteUrl = "../images/sprites/filesandbytearrays-sprite.png";
-            string cssFilename = Path.Combine(_webRootPath, @"css\filesandbytearrays-sprite.css");
+            var cssFilename = Path.Combine(_webRootPath, @"css\filesandbytearrays-sprite.css");
 
-            spriteManager.CreateSprite(imageFiles, new SpriteSettings(spriteFilename, spriteUrl, cssFilename));
+            spriteManager.CreateSprite(imageFiles, new FileSystemSpriteSettings(spriteFilename, spriteUrl, cssFilename));
 
             return View();
         }
@@ -130,24 +130,49 @@ namespace DoTheSpriteThing.Testbed.Controllers
                 new FileSpriteImage(new FileInfo(Path.Combine(_webRootPath, @"images\png\bbc.png")), new HoverFileImage(new FileInfo(Path.Combine(_webRootPath, @"images\facebook.png"))))
             };
 
-            string spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
+            var spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
 
             if (!Directory.Exists(spriteFolder))
             {
                 Directory.CreateDirectory(spriteFolder);
             }
 
-            string spriteFilename = Path.Combine(spriteFolder, "hover-sprite.png");
+            var spriteFilename = Path.Combine(spriteFolder, "hover-sprite.png");
             const string spriteUrl = "../images/sprites/hover-sprite.png";
-            string cssFilename = Path.Combine(_webRootPath, @"css\hover-sprite.css");
+            var cssFilename = Path.Combine(_webRootPath, @"css\hover-sprite.css");
 
-            spriteManager.CreateSprite(images, null, new SpriteSettings(spriteFilename, spriteUrl, cssFilename));
+            spriteManager.CreateSprite(images, null, new FileSystemSpriteSettings(spriteFilename, spriteUrl, cssFilename));
 
             return View();
         }
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult AzureStorage()
+        {
+            var spriteManager = new SpriteManager();
+            IReadOnlyCollection<ISpriteImage> images = new List<ISpriteImage>
+            {
+                new FileSpriteImage(new FileInfo(Path.Combine(_webRootPath, @"images\png\facebook.png")), 128, 128),
+                new FileSpriteImage(new FileInfo(Path.Combine(_webRootPath, @"images\bbc.png")), 128, 128)
+            };
+
+            var spriteFolder = Path.Combine(_webRootPath, @"images\sprites");
+
+            if (!Directory.Exists(spriteFolder))
+            {
+                Directory.CreateDirectory(spriteFolder);
+            }
+
+            const string spriteFilename = "azure-storage-sprite.png";
+            const string spriteUrl = "http://127.0.0.1:10000/devstoreaccount1/sprite-testbed/azure-storage-sprite.png";
+            const string cssFilename = "azure-storage-sprite.css";
+
+            spriteManager.CreateSprite(images, null, new AzureStorageSpriteSettings(spriteFilename, spriteUrl, cssFilename, "UseDevelopmentStorage=true", "css-testbed", "sprite-testbed"));
+
             return View();
         }
     }

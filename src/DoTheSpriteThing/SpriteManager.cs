@@ -54,7 +54,7 @@ namespace DoTheSpriteThing
         /// </summary>
         /// <param name="images">The list of images to include in the sprite.</param>        
         /// <param name="spriteSettings">The settings to use when creating the sprite.</param>
-        public void CreateSprite(IReadOnlyCollection<ISpriteImage> images, SpriteSettings spriteSettings)
+        public void CreateSprite(IReadOnlyCollection<ISpriteImage> images, ISpriteSettings spriteSettings)
         {
             CreateSprite(images, DefaultPlaceholderImages, spriteSettings);
         }
@@ -65,7 +65,7 @@ namespace DoTheSpriteThing
         /// <param name="images">The list of images to include in the sprite.</param>
         /// <param name="placeholderImages">The list of custom placeholder images.</param>
         /// <param name="spriteSettings">The settings to use when creating the sprite.</param>
-        public void CreateSprite(IReadOnlyCollection<ISpriteImage> images, IReadOnlyCollection<ISpriteImage> placeholderImages, SpriteSettings spriteSettings)
+        public void CreateSprite(IReadOnlyCollection<ISpriteImage> images, IReadOnlyCollection<ISpriteImage> placeholderImages, ISpriteSettings spriteSettings)
         {
             if (images == null)
             {
@@ -108,7 +108,7 @@ namespace DoTheSpriteThing
                 var selectedHoverImageTop = 0;
                 var selectedHoverImageWidth = 0;
 
-                MagickImage imageForSprite = ImageToMagickImage(image);
+                var imageForSprite = ImageToMagickImage(image);
 
                 if (imageForSprite != null)
                 {
@@ -120,11 +120,11 @@ namespace DoTheSpriteThing
                 }
                 else
                 {
-                    string selectedPlaceholderImageKey = placeholderImages.Any(x => x.Key == image.PlaceholderImageKey) ? image.PlaceholderImageKey : placeholderImages.First().Key;
-                    ISpriteImage selectedPlaceholderImage = placeholderImages.FirstOrDefault(x => x.Key == selectedPlaceholderImageKey);
+                    var selectedPlaceholderImageKey = placeholderImages.Any(x => x.Key == image.PlaceholderImageKey) ? image.PlaceholderImageKey : placeholderImages.First().Key;
+                    var selectedPlaceholderImage = placeholderImages.FirstOrDefault(x => x.Key == selectedPlaceholderImageKey);
                     imageForSprite = ImageToMagickImage(selectedPlaceholderImage);
 
-                    SpritePlaceholderImage spritePlaceholderImage = spritePlaceholderImages.FirstOrDefault(x => x.Key == selectedPlaceholderImageKey && x.Width == imageForSprite.Width && x.Height == imageForSprite.Height);
+                    var spritePlaceholderImage = spritePlaceholderImages.FirstOrDefault(x => x.Key == selectedPlaceholderImageKey && x.Width == imageForSprite.Width && x.Height == imageForSprite.Height);
 
                     if (spritePlaceholderImage == null)
                     {
@@ -140,7 +140,7 @@ namespace DoTheSpriteThing
                     selectedImageWidth = spritePlaceholderImage.Width;
                 }
 
-                string selectedImageTopText = selectedImageTop != 0 ? $"-{selectedImageTop}px" : "0";
+                var selectedImageTopText = selectedImageTop != 0 ? $"-{selectedImageTop}px" : "0";
                 css.Append($"#{image.Key}{{height:{selectedImageHeight}px;width:{selectedImageWidth}px;background:url('{spriteSettings.SpriteUrl}') 0 {selectedImageTopText};}}");
 
                 if (hasImageBeenAddedToSprite)
@@ -150,7 +150,7 @@ namespace DoTheSpriteThing
 
                 if (image.HoverImage != null)
                 {
-                    MagickImage hoverImageForSprite = ImageToMagickImage(image.HoverImage, imageForSprite);
+                    var hoverImageForSprite = ImageToMagickImage(image.HoverImage, imageForSprite);
 
                     if (hoverImageForSprite != null)
                     {
@@ -161,7 +161,7 @@ namespace DoTheSpriteThing
                         selectedHoverImageWidth = hoverImageForSprite.Width;
                     }
 
-                    string selectedHoverImageTopText = selectedHoverImageTop != 0 ? $"-{selectedHoverImageTop}px" : "0";
+                    var selectedHoverImageTopText = selectedHoverImageTop != 0 ? $"-{selectedHoverImageTop}px" : "0";
                     css.Append($"#{image.Key}:hover{{height:{selectedHoverImageHeight}px;width:{selectedHoverImageWidth}px;background:url('{spriteSettings.SpriteUrl}') 0 {selectedHoverImageTopText};}}");
 
                     if (hasImageBeenAddedToSprite)
@@ -171,8 +171,8 @@ namespace DoTheSpriteThing
                 }
             }
 
-            _imageProcessor.CreateSprite(spriteImages, spriteSettings.SpriteFilename);
-            _cssProcessor.CreateCss(css.ToString(), spriteSettings.CssFilename);
+            _imageProcessor.CreateSprite(spriteImages, spriteSettings);
+            _cssProcessor.CreateCss(css.ToString(), spriteSettings);
         }
 
         private MagickImage ImageToMagickImage(ISpriteImage image)

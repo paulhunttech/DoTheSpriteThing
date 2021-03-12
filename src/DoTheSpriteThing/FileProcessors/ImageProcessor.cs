@@ -5,10 +5,10 @@ namespace DoTheSpriteThing.FileProcessors
 {
     internal class ImageProcessor : IImageProcessor
     {
-        public void CreateSprite(MagickImageCollection spriteImages, string spriteFilename)
+        public void CreateSprite(MagickImageCollection spriteImages, ISpriteSettings spriteSettings)
         {
             using var result = spriteImages.AppendVertically();
-            result.Write(spriteFilename);
+            spriteSettings.SaveSpriteAsync(result);
         }
     }
 }

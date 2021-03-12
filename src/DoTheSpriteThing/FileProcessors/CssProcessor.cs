@@ -1,13 +1,12 @@
-using System.IO;
 using DoTheSpriteThing.FileProcessors.Interfaces;
 
 namespace DoTheSpriteThing.FileProcessors
 {
     internal class CssProcessor : ICssProcessor
     {
-        public void CreateCss(string css, string cssFilename)
+        public void CreateCss(string css, ISpriteSettings spriteSettings)
         {
-            File.WriteAllText(cssFilename, css);
+            spriteSettings.SaveCssAsync(css);
         }
     }
 }

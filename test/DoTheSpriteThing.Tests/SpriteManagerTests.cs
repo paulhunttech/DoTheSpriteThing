@@ -49,7 +49,7 @@ namespace DoTheSpriteThing.Tests
             };
 
             // Act + Assert
-            var exception = Assert.Throws<ArgumentException>(() => _spriteManager.CreateSprite(images, null, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
+            var exception = Assert.Throws<ArgumentException>(() => _spriteManager.CreateSprite(images, null, new FileSystemSpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
             exception.Message.ShouldBe("The list of keys must be unique. (Parameter 'images')"); 
             exception.ParamName.ShouldBe("images");
         }
@@ -65,7 +65,7 @@ namespace DoTheSpriteThing.Tests
             };
 
             // Act + Assert
-            var exception = Assert.Throws<ArgumentException>(() => _spriteManager.CreateSprite(new List<ISpriteImage>(), placeholderImages, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
+            var exception = Assert.Throws<ArgumentException>(() => _spriteManager.CreateSprite(new List<ISpriteImage>(), placeholderImages, new FileSystemSpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
             exception.Message.ShouldBe("The list of keys must be unique. (Parameter 'placeholderImages')");
             exception.ParamName.ShouldBe("placeholderImages");
         }
@@ -89,13 +89,13 @@ namespace DoTheSpriteThing.Tests
 
             var spriteImages = new List<IMagickImage>();
 
-            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((MagickImageCollection a, string b) => spriteImages.AddRange(a));
+            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<ISpriteSettings>())).Callback((MagickImageCollection a, ISpriteSettings b) => spriteImages.AddRange(a));
 
             // Act
-            _spriteManager.CreateSprite(images, null, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css"));
+            _spriteManager.CreateSprite(images, null, new FileSystemSpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css"));
 
             // Assert
-            _imageProcessorMock.Verify(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>()));
+            _imageProcessorMock.Verify(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<ISpriteSettings>()));
             spriteImages.Count.ShouldBe(1);
             spriteImages[0].Width.ShouldBe(Image252X175Width);
             spriteImages[0].Height.ShouldBe(Image252X175Height);
@@ -124,7 +124,7 @@ namespace DoTheSpriteThing.Tests
 
             var spriteImages = new List<IMagickImage>();
 
-            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((MagickImageCollection a, string b) => spriteImages.AddRange(a));
+            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<ISpriteSettings>())).Callback((MagickImageCollection a, ISpriteSettings b) => spriteImages.AddRange(a));
 
             var placeholderImages = new List<ISpriteImage>
             {
@@ -133,10 +133,10 @@ namespace DoTheSpriteThing.Tests
             };
 
             // Act
-            _spriteManager.CreateSprite(images, placeholderImages, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css"));
+            _spriteManager.CreateSprite(images, placeholderImages, new FileSystemSpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css"));
 
             // Assert
-            _imageProcessorMock.Verify(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>()));
+            _imageProcessorMock.Verify(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<ISpriteSettings>()));
             spriteImages.Count.ShouldBe(1);
             spriteImages[0].Width.ShouldBe(Image100X56Width);
             spriteImages[0].Height.ShouldBe(Image100X56Height);
@@ -146,7 +146,7 @@ namespace DoTheSpriteThing.Tests
         public void CreateSprite_NullImagesParam_ShouldThrow()
         {
             // Act + Assert
-            var exception = Assert.Throws<ArgumentNullException>(() => _spriteManager.CreateSprite(null, null, new SpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
+            var exception = Assert.Throws<ArgumentNullException>(() => _spriteManager.CreateSprite(null, null, new FileSystemSpriteSettings(@"c:\sprite.png", "/sprite.png", @"c:\sprite.css")));
             exception.ParamName.ShouldBe("images");
         }
 
@@ -179,18 +179,20 @@ namespace DoTheSpriteThing.Tests
                 new ByteArraySpriteImage("b", imageByteArray2)
             };
 
+            var spriteSettings = new FileSystemSpriteSettings(@"c:\sprite.png", spriteUrl, cssFilename);
+
             // Act
-            _spriteManager.CreateSprite(images, null, new SpriteSettings(@"c:\sprite.png", spriteUrl, cssFilename));
+            _spriteManager.CreateSprite(images, null, spriteSettings);
 
             // Assert
-            _cssProcessorMock.Verify(x => x.CreateCss($"#a{{height:175px;width:252px;background:url('{spriteUrl}') 0 0;}}#b{{height:56px;width:100px;background:url('{spriteUrl}') 0 -175px;}}", cssFilename));
+            _cssProcessorMock.Verify(x => x.CreateCss($"#a{{height:175px;width:252px;background:url('{spriteUrl}') 0 0;}}#b{{height:56px;width:100px;background:url('{spriteUrl}') 0 -175px;}}", spriteSettings));
         }
 
         [Test]
         public void CreateSprite_ValidByteArrayListInImagesParam_ShouldGenerateSprite()
         {
             // Arrange
-            const string spriteFilename = @"C:\sprite.png";
+            const string spriteFilename =  @"C:\sprite.png";
 
             var imageByteArray1 = Convert.FromBase64String(Image272X100Base64);
             var imageByteArray2 = Convert.FromBase64String(Image100X56Base64);
@@ -202,7 +204,7 @@ namespace DoTheSpriteThing.Tests
 
             var spriteImages = new List<IMagickImage>();
 
-            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((MagickImageCollection a, string b) => spriteImages.AddRange(a));
+            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<ISpriteSettings>())).Callback((MagickImageCollection a, ISpriteSettings b) => spriteImages.AddRange(a));
 
             var images = new List<ISpriteImage>
             {
@@ -210,11 +212,13 @@ namespace DoTheSpriteThing.Tests
                 new ByteArraySpriteImage("b", imageByteArray2)
             };
 
+            var spriteSettings = new FileSystemSpriteSettings(spriteFilename, "/sprite.png", @"c:\sprite.css");
+
             // Act
-            _spriteManager.CreateSprite(images, null, new SpriteSettings(spriteFilename, "/sprite.png", @"c:\sprite.css"));
+            _spriteManager.CreateSprite(images, null, spriteSettings);
 
             // Assert
-            _imageProcessorMock.Verify(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), spriteFilename));
+            _imageProcessorMock.Verify(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), spriteSettings));
             spriteImages.Count.ShouldBe(2);
             spriteImages[0].Width.ShouldBe(Image252X175Width);
             spriteImages[0].Height.ShouldBe(Image252X175Height);
@@ -252,11 +256,13 @@ namespace DoTheSpriteThing.Tests
                 new FileSpriteImage(imageFile2)
             };
 
+            var spriteSettings = new FileSystemSpriteSettings(@"c:\sprite.png", spriteUrl, cssFilename);
+
             // Act
-            _spriteManager.CreateSprite(images, null, new SpriteSettings(@"c:\sprite.png", spriteUrl, cssFilename));
+            _spriteManager.CreateSprite(images, null, spriteSettings);
 
             // Assert
-            _cssProcessorMock.Verify(x => x.CreateCss($"#a-png{{height:{image1Height}px;width:{image1Width}px;background:url('{spriteUrl}') 0 0;}}#b-png{{height:{image2Height}px;width:{image2Width}px;background:url('{spriteUrl}') 0 -{image1Height}px;}}", cssFilename));
+            _cssProcessorMock.Verify(x => x.CreateCss($"#a-png{{height:{image1Height}px;width:{image1Width}px;background:url('{spriteUrl}') 0 0;}}#b-png{{height:{image2Height}px;width:{image2Width}px;background:url('{spriteUrl}') 0 -{image1Height}px;}}", spriteSettings));
         }
 
         [Test]
@@ -284,7 +290,7 @@ namespace DoTheSpriteThing.Tests
 
             var spriteImages = new List<IMagickImage>();
 
-            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((MagickImageCollection a, string b) => spriteImages.AddRange(a));
+            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<ISpriteSettings>())).Callback((MagickImageCollection a, ISpriteSettings b) => spriteImages.AddRange(a));
 
             var images = new List<ISpriteImage>
             {
@@ -292,11 +298,13 @@ namespace DoTheSpriteThing.Tests
                 new FileSpriteImage(imageFile2)
             };
 
+            var spriteSettings = new FileSystemSpriteSettings(spriteFilename, "/sprite.png", @"c:\sprite.css");
+
             // Act
-            _spriteManager.CreateSprite(images, null, new SpriteSettings(spriteFilename, "/sprite.png", @"c:\sprite.css"));
+            _spriteManager.CreateSprite(images, null, spriteSettings);
 
             // Assert
-            _imageProcessorMock.Verify(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), spriteFilename));
+            _imageProcessorMock.Verify(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), spriteSettings));
             spriteImages.Count.ShouldBe(2);
             spriteImages[0].BackgroundColor.ShouldBe(image1Colour);
             spriteImages[0].Width.ShouldBe(image1Width);
@@ -332,11 +340,13 @@ namespace DoTheSpriteThing.Tests
                 new ByteArraySpriteImage("b", imageByteArray2)
             };
 
+            var spriteSettings = new FileSystemSpriteSettings(@"c:\sprite.png", spriteUrl, cssFilename);
+
             // Act
-            _spriteManager.CreateSprite(images, null, new SpriteSettings(@"c:\sprite.png", spriteUrl, cssFilename));
+            _spriteManager.CreateSprite(images, null, spriteSettings);
 
             // Assert
-            _cssProcessorMock.Verify(x => x.CreateCss($"#a-png{{height:{image1Height}px;width:{image1Width}px;background:url('{spriteUrl}') 0 0;}}#b{{height:56px;width:100px;background:url('{spriteUrl}') 0 -{image1Height}px;}}", cssFilename));
+            _cssProcessorMock.Verify(x => x.CreateCss($"#a-png{{height:{image1Height}px;width:{image1Width}px;background:url('{spriteUrl}') 0 0;}}#b{{height:56px;width:100px;background:url('{spriteUrl}') 0 -{image1Height}px;}}", spriteSettings));
         }
 
         [Test]
@@ -360,7 +370,7 @@ namespace DoTheSpriteThing.Tests
 
             var spriteImages = new List<IMagickImage>();
 
-            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<string>())).Callback((MagickImageCollection a, string b) => spriteImages.AddRange(a));
+            _imageProcessorMock.Setup(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), It.IsAny<ISpriteSettings>())).Callback((MagickImageCollection a, ISpriteSettings b) => spriteImages.AddRange(a));
 
             var images = new List<ISpriteImage>
             {
@@ -368,11 +378,13 @@ namespace DoTheSpriteThing.Tests
                 new ByteArraySpriteImage("b", imageByteArray2)
             };
 
+            var spriteSettings = new FileSystemSpriteSettings(spriteFilename, "/sprite.png", @"c:\sprite.css");
+
             // Act
-            _spriteManager.CreateSprite(images, null, new SpriteSettings(spriteFilename, "/sprite.png", @"c:\sprite.css"));
+            _spriteManager.CreateSprite(images, null, spriteSettings);
 
             // Assert
-            _imageProcessorMock.Verify(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), spriteFilename));
+            _imageProcessorMock.Verify(x => x.CreateSprite(It.IsAny<MagickImageCollection>(), spriteSettings));
             spriteImages.Count.ShouldBe(2);
             spriteImages[0].BackgroundColor.ShouldBe(image1Colour);
             spriteImages[0].Width.ShouldBe(image1Width);
