@@ -8,6 +8,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  solutionFilename: 'DoTheSpriteThing.sln'
   packageProjectPath: 'src\DoTheSpriteThing\DoTheSpriteThing.csproj'
   testsProjectPath: 'test\DoTheSpriteThing.Tests\DoTheSpriteThing.Tests.csproj'
   
@@ -16,7 +17,7 @@ steps:
   displayName: 'Restore packages'
   inputs:
     command: 'restore'
-    projects: $(packageProjectPath)/**/*.csproj
+    projects: $(solutionFilename)
     feedsToUse: 'select'
     vstsFeed: '/6a974ad4-691c-4139-ab48-af9c2c69a028'
     verbosityRestore: 'Normal'
