@@ -17,7 +17,9 @@ steps:
   displayName: 'Restore packages'
   inputs:
     command: 'restore'
-    projects: '$(packageProjectPath);$(testsProjectPath)'
+    projects: |
+      $(packageProjectPath)
+      $(testsProjectPath)
     feedsToUse: 'select'
     feedRestore: 'phwebsitedesign'
     verbosityRestore: 'Normal'
