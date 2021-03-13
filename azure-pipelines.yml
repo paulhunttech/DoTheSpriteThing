@@ -8,37 +8,40 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  solutionFilename: 'DoTheSpriteThing.sln'
   packageProjectPath: 'src\DoTheSpriteThing\DoTheSpriteThing.csproj'
   testsProjectPath: 'test\DoTheSpriteThing.Tests\DoTheSpriteThing.Tests.csproj'
-  
+  packageOutputPath: '$(Build.ArtifactStagingDirectory)/DoTheSpriteThing'
+
 steps:
 - task: DotNetCoreCLI@2
   displayName: 'Restore packages'
   inputs:
     command: 'restore'
-    projects: $(solutionFilename)
+    projects: '$(packageProjectPath);$(testsProjectPath)'
     feedsToUse: 'select'
-    vstsFeed: '/6a974ad4-691c-4139-ab48-af9c2c69a028'
+    feedRestore: 'phwebsitedesign'
     verbosityRestore: 'Normal'
 
-- script: dotnet build --configuration $(buildConfiguration) --no-restore
-  displayName: 'Build'    
-
-- script: dotnet test $(testsProjectPath) --configuration $(buildConfiguration) --filter TestCategory!=AutomationTests --no-build
-  displayName: 'Run tests'  
+- task: DotNetCoreCLI@2
+  displayName: 'Run tests'
+  inputs:
+    command: 'test'
+    packages: '$(testsProjectPath)'
+    arguments: '--no-restore --configuration $(buildConfiguration) --filter TestCategory!=AutomationTests'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Pack'
+  displayName: 'Pack NuGet package'
   inputs:
     command: 'pack'
     packagesToPack: '$(packageProjectPath)'
-    nobuild: true
-    versioningScheme: 'off'    
+    outputDir: '$(packageOutputPath)'
+    versioningScheme: 'byBuildNumber'
+    includeSymbols: true
+    arguments: '--no-restore --configuration $(buildConfiguration)'
 
-- task: NuGetCommand@2
-  displayName: 'Push package to internal NuGet feed'
+- task: DotNetCoreCLI@2
+  displayName: 'Push NuGet package'  
   inputs:
-    command: push
-    packagesToPush: '**/*.nupkg'
-    publishVstsFeed: '/6a974ad4-691c-4139-ab48-af9c2c69a028'
+    command: 'push'
+    searchPatternPush: '$(packageOutputPath)/*.nupkg'
+    feedPublish: 'phwebsitedesign'
