@@ -37,7 +37,6 @@ steps:
     command: 'pack'
     packagesToPack: '$(packageProjectPath)'
     outputDir: '$(packageOutputPath)'
-    includeSymbols: true
     arguments: '--no-restore --configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
