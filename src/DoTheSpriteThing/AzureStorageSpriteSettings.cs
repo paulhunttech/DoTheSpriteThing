@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using ImageMagick;
 
 namespace DoTheSpriteThing
@@ -71,7 +72,7 @@ namespace DoTheSpriteThing
             await using var spriteStream = new MemoryStream();
             sprite.Write(spriteStream);
             spriteStream.Position = 0;
-            await UploadFileAsync(_spriteBlobContainerClient, spriteStream, SpriteFilename);
+            await UploadFileAsync(_spriteBlobContainerClient, spriteStream, SpriteFilename, "image/jpeg");
         }
 
         public async Task SaveCssAsync(string css)
@@ -81,13 +82,20 @@ namespace DoTheSpriteThing
             await writer.WriteAsync(css);
             await writer.FlushAsync();
             stream.Position = 0;
-            await UploadFileAsync(_cssBlobContainerClient, stream, CssFilename);
+            await UploadFileAsync(_cssBlobContainerClient, stream, CssFilename, "text/css");
         }
 
-        private static async Task UploadFileAsync(BlobContainerClient blobContainerClient, Stream fileStream, string blobName)
+        private static async Task UploadFileAsync(BlobContainerClient blobContainerClient, Stream fileStream, string blobName, string contentType)
         {
             var blobClient = blobContainerClient.GetBlobClient(blobName);
-            await blobClient.UploadAsync(fileStream, true);
+
+            await blobClient.UploadAsync(
+                fileStream,
+                new BlobHttpHeaders
+                {
+                    ContentType = contentType
+                },
+                conditions: null);
         }
     }
 }
