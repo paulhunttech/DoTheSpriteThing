@@ -38,10 +38,10 @@ steps:
     packagesToPack: '$(packageProjectPath)'
     outputDir: '$(packageOutputPath)'
     arguments: '--no-restore --configuration $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Push NuGet package'  
+  
+- task: PublishBuildArtifacts@1
   inputs:
-    command: 'push'
-    searchPatternPush: '$(packageOutputPath)/*.nupkg'
+    PathtoPublish: '$(packageOutputPath)/*.nupkg'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
     feedPublish: 'phwebsitedesign'
