@@ -227,7 +227,6 @@ namespace DoTheSpriteThing.Tests
         }
 
         [Test]
-        [Ignore("Doesn't work in Github Actions")]
         public void CreateSprite_ValidFileListInImagesParam_ShouldGenerateCss()
         {
             // Arrange
@@ -267,7 +266,6 @@ namespace DoTheSpriteThing.Tests
         }
 
         [Test]
-        [Ignore("Doesn't work in Github Actions")]
         public void CreateSprite_ValidFileListInImagesParam_ShouldGenerateSprite()
         {
             // Arrange
@@ -317,7 +315,6 @@ namespace DoTheSpriteThing.Tests
         }
 
         [Test]
-        [Ignore("Doesn't work in Github Actions")]
         public void CreateSprite_ValidMixedFileAndByteArrayListInImagesParam_ShouldGenerateCss()
         {
             // Arrange

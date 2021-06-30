@@ -4,17 +4,17 @@
     <id>do-the-sprite-thing</id>
     <version>1.0.0</version>
     <description>Do The Sprite Thing is a library for generating sprites for ASP.NET Core websites.</description>
-    <authors>woodburysoft</authors>
+    <authors>Paul Hunt</authors>
     <title>Do The Sprite Thing</title>
     <licenseUrl>https://opensource.org/licenses/LGPL-3.0</licenseUrl>
-    <owners>woodburysoft</owners>
-    <projectUrl>https://github.com/woodburysoft/DoTheSpriteThing</projectUrl>
+    <owners>Paul Hunt</owners>
+    <projectUrl>https://github.com/pahunt78/DoTheSpriteThing</projectUrl>
     <tags>sprite image</tags>
     <dependencies>
-      <dependency id="Magick.NET.Core-Q8" version="7.0.4.400" />
-      <dependency id="Microsoft.AspNetCore.Razor.Runtime" version="1.1.0" />
-      <dependency id="NETStandard.Library" version="1.6.1" />
-      <dependency id="Thinktecture.IO.FileSystem.Abstractions" version="1.3.0" />
+      <dependency id="Azure.Storage.Blobs" version="12.8.0" />
+      <dependency id="Microsoft.AspNetCore.Razor.Runtime" version="2.2.0" />
+      <dependency id="Thinktecture.IO.FileSystem.Abstractions" version="2.4.0" />
+      <dependency id="Magick.NET-Q16-AnyCPU" version="7.15.5" />
     </dependencies>
   </metadata>
   <files>
